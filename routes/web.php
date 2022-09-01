@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +35,16 @@ Route::post('/profile/password/update', [HomeController::class, 'passwordUpdate'
 Route::post('/profile/picture/update', [HomeController::class, 'picture_update']);
 Route::post('user/profile/update', [HomeController::class, 'userUpdate'])->name('userUpdate');
 
+//company
 Route::get('/company', [CompanyController::class, 'index'])->name('company');
 Route::get('/companyAdd', [CompanyController::class, 'companyAdd'])->name('companyAdd');
 Route::post('/companyStore', [CompanyController::class, 'companyStore'])->name('companyStore');
 Route::get('/companyEdit/{company_id}', [CompanyController::class, 'companyEdit'])->name('companyEdit');
 Route::post('/companyUpdate', [CompanyController::class, 'companyUpdate'])->name('companyUpdate');
 Route::get('/companyDelete/{id}', [CompanyController::class, 'companyDelete'])->name('companyDelete');
+
+//brand
+Route::get('brand-name', [BrandController::class, 'index'])->name('brand');
+Route::post('brand-name-store', [BrandController::class, 'store'])->name('brandNameStore');
+Route::post('/brand-name-update', [BrandController::class, 'update'])->name('brandUpdate');
+Route::get('/brandDelete/{id}', [BrandController::class, 'destroy'])->name('brandDelete');

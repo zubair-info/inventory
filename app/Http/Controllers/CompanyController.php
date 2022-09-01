@@ -28,12 +28,7 @@ class CompanyController extends Controller
             'company_phone' => $request->company_phone,
             'company_email' => $request->company_email,
             'company_address' => $request->company_address,
-            // 'mobile_logo' => $request->mobile_logo,
-            // 'company_logo' => $request->company_logo,
-            // 'company_favicon' => $request->company_favicon,
         ]);
-
-
 
         if ($request->mobile_logo) {
             $mobile_logo = $request->mobile_logo;
@@ -66,32 +61,6 @@ class CompanyController extends Controller
                 'company_favicon' => $file_name_company_favicon,
             ]);
         }
-
-        // // echo $mobile_logo;
-        // $extention_mobile_logo = $mobile_logo->getClientOriginalExtension();
-        // // echo $extention_mobile_logo;
-        // $file_name_mobile_logo = $company_id . '.' . $extention_mobile_logo;
-        // Image::make($mobile_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_mobile_logo));
-
-        // $company_logo = $request->company_logo;
-        // // echo $company_logo;
-        // $extention = $company_logo->getClientOriginalExtension();
-        // // echo $extention;
-        // $file_name_company_logo = $company_id . '.' . $extention;
-        // Image::make($company_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_logo));
-
-        // $company_favicon = $request->company_logo;
-        // // echo $company_favicon;
-        // $extention_company_favicon = $company_favicon->getClientOriginalExtension();
-        // // echo $extention;
-        // $file_name_company_favicon = $company_id . '.' . $extention_company_favicon;
-        // Image::make($company_favicon)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_favicon));
-
-        // Company::find($company_id)->update([
-        //     'mobile_logo' => $file_name_mobile_logo,
-        //     'company_logo' => $file_name_company_logo,
-        //     'company_favicon' => $file_name_company_logo,
-        // ]);
         $notification = array(
             'message' => 'Company  Add Sucessfully!',
             'alert-type' => 'success'

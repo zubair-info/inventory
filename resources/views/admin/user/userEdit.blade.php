@@ -25,7 +25,7 @@
                     <form action="{{route('userUpdate')}}" method="post"  enctype="multipart/form-data">
                         @csrf
 
-                        <input type="text" name="user_id" value="{{$all_user->id }}">
+                        <input type="hidden" name="user_id" value="{{$all_user->id }}">
                         
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
