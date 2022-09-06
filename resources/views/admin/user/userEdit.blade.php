@@ -37,7 +37,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email"  value="{{$all_user->email }}"  class="form-control" placeholder="Enter email">
+                            <input type="email" name="email"   value="{{$all_user->email }}"  class="form-control disabled"  placeholder="Enter email">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>

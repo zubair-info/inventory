@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductFeatureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,19 @@ Route::post('/companyStore', [CompanyController::class, 'companyStore'])->name('
 Route::get('/companyEdit/{company_id}', [CompanyController::class, 'companyEdit'])->name('companyEdit');
 Route::post('/companyUpdate', [CompanyController::class, 'companyUpdate'])->name('companyUpdate');
 Route::get('/companyDelete/{id}', [CompanyController::class, 'companyDelete'])->name('companyDelete');
+
+
+
+Route::get('product-feacture', [ProductFeatureController::class, 'index'])->name('product_feacture');
+Route::get('product-feacture-add', [ProductFeatureController::class, 'product_feacture_add'])->name('product_feacture_add');
+Route::post('product-feacture-store', [ProductFeatureController::class, 'productFeactureStore'])->name('productFeactureStore');
+Route::get('product-feacture-edit/{product_feacture_id}', [ProductFeatureController::class, 'product_feacture_edit'])->name('product_feacture_edit');
+Route::post('product-feacture-update', [ProductFeatureController::class, 'productFeactureUpdate'])->name('productFeactureUpdate');
+Route::get('productFeactureDelete/{id}', [ProductFeatureController::class, 'productFeactureDelete'])->name('productFeactureDelete');
+
+
+
+
 
 //brand
 Route::get('brand-name', [BrandController::class, 'index'])->name('brand');

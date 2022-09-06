@@ -35,7 +35,7 @@
                                 
                                 <div class="text-center w-75 m-auto">
                                     <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
-                                    <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                                    {{-- <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p> --}}
                                 </div>
                                 @if (session('inactive_status'))
 									<div class="alert alert-danger">{{session('inactive_status')}}</div>			
@@ -100,6 +100,7 @@
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
+
 
                     </div> <!-- end col -->
                 </div>

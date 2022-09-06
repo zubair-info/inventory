@@ -8,8 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Coderthemes" name="author">
+        @php
+            $get_company_info=App\Models\Company::first();
+        @endphp
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('/uploads/company') }}/{{$get_company_info->company_favicon}}">
 
 
          <!-- third party css -->
@@ -21,10 +24,15 @@
          <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
         <link href="{{asset('backend/assets/css/vendor/select.bootstrap5.css" rel="stylesheet')}}" type="text/css" />
-        <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+        {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" /> --}}
          
-
+<style>
+    #basic-datatable_paginate{
+        display: flex;
+         justify-content: end;
+    }
+</style>
     </head>
 
     <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -36,8 +44,9 @@
                 <!-- LOGO -->
                 <a href="index.html" class="logo text-center logo-light">
                     <span class="logo-lg">
-                        <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="30">
-                        {{-- <img src="assets/images/logo.png" alt="" height="16"> --}}
+                        
+                        {{-- <img  src="{{ asset('/uploads/company') }}/{{$get_company_info->company_logo}}" alt="Logo" width="100" height="30"> --}}
+                        <img src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo.png" alt="" height="30">
                     </span>
                     <span class="logo-sm">
                         <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="12">
@@ -46,23 +55,23 @@
                 </a>
 
                 <!-- LOGO -->
-                <a href="index.html" class="logo text-center logo-dark">
-                    <span class="logo-lg">
+                {{-- <a href="index.html" class="logo text-center logo-dark"> --}}
+                    {{-- <span class="logo-lg">
                         <img src="assets/images/logo-dark.png" alt="" height="16">
                     </span>
                     <span class="logo-sm">
                         <img src="assets/images/logo_sm_dark.png" alt="" height="16">
                     </span>
-                </a>
+                </a> --}}
     
                 <div class="h-100" id="leftside-menu-container" data-simplebar="">
 
                     <!--- Sidemenu -->
                     <ul class="side-nav">
 
-                        <li class="side-nav-title side-nav-item">Navigation</li>
+                        {{-- <li class="side-nav-title side-nav-item">Navigation</li> --}}
 
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span class="badge bg-success float-end">4</span>
@@ -84,30 +93,37 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li class="side-nav-title side-nav-item">Admin</li>
 
 
                         <li class="side-nav-item">
                             <a href="{{ route('user') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
+                                <i class=" dripicons-user"></i>
                                 <span>User</span>
                             </a>
                         <li class="side-nav-item">
                             <a href="{{ route('company') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
+                                <i class=" uil-copyright"></i>
                                 <span>Setup Company</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
+                            <a href="{{ route('product_feacture') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Product Feacture</span>
+                            </a>
+                        </li>
+
+                        {{-- <li class="side-nav-item">
                             <a href="{{ route('brand') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
                                 <span>Brand</span>
                             </a>
-                        </li>
+                        </li> --}}
 
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
                                 <i class="uil-store"></i>
                                 <span> Ecommerce </span>
@@ -121,7 +137,7 @@
                                    
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                     <!-- End Sidebar -->
 
@@ -324,11 +340,11 @@
                                 </div>
                             </li> --}}
 
-                            <li class="notification-list">
+                            {{-- <li class="notification-list">
                                 <a class="nav-link end-bar-toggle" href="javascript: void(0);">
                                     <i class="dripicons-gear noti-icon"></i>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -348,10 +364,10 @@
                                     </a>
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <i class="mdi mdi-account-edit me-1"></i>
                                         <span>Settings</span>
-                                    </a>
+                                    </a> --}}
 
                                     <!-- item-->
                                     <a class="dropdown-item notify-item" href="{{ route('logout') }}"
@@ -374,13 +390,13 @@
                             <i class="mdi mdi-menu"></i>
                         </button>
                         <div class="app-search dropdown d-none d-lg-block">
-                            <form>
+                            {{-- <form>
                                 <div class="input-group">
                                     <input type="text" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
                                     <span class="mdi mdi-magnify search-icon"></span>
                                     <button class="input-group-text btn-primary" type="submit">Search</button>
                                 </div>
-                            </form>
+                            </form> --}}
 
                             {{-- <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
                                 <!-- item-->
@@ -471,13 +487,13 @@
                             <div class="col-md-6">
                                 <script>document.write(new Date().getFullYear())</script> © bitBirds - bitbirds.com
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="text-md-end footer-links d-none d-md-block">
                                     <a href="javascript: void(0);">About</a>
                                     <a href="javascript: void(0);">Support</a>
                                     <a href="javascript: void(0);">Contact Us</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </footer>
@@ -495,7 +511,7 @@
 
 
         <!-- Right Sidebar -->
-        <div class="end-bar">
+        {{-- <div class="end-bar">
 
             <div class="rightbar-title">
                 <a href="javascript:void(0);" class="end-bar-toggle float-end">
@@ -576,10 +592,10 @@
                     <div class="d-grid mt-4">
                         <button class="btn btn-primary" id="resetBtn">Reset to Default</button>
                     </div>
-                </div> <!-- end padding-->
+                </div>
 
             </div>
-        </div>
+        </div> --}}
 
         <div class="rightbar-overlay"></div>
         <!-- /End-bar -->
@@ -595,13 +611,13 @@
         <!-- third party js ends --> --}}
 
         <!-- demo app -->
-        <script src="{{asset('backend/assets/js/pages/demo.dashboard.js')}}"></script>
+        {{-- <script src="{{asset('backend/assets/js/pages/demo.dashboard.js')}}"></script> --}}
         <!-- end demo js-->
         
         <script src="{{asset('backend/assets/js/vendor.min.js')}}"></script>
         <script src="{{asset('backend/assets/js/app.min.js')}}"></script>
  
-        <script src="{{asset('backend/assets/js/pages/demo.toastr.js')}}"></script>
+        {{-- <script src="{{asset('backend/assets/js/pages/demo.toastr.js')}}"></script> --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
 			@if (Session::has('message'))
@@ -627,9 +643,9 @@
 		</script>
 
         <!-- plugin js -->
-        <script src="{{asset('backend/assets/js/vendor/dropzone.min.js')}}"></script>
+        {{-- <script src="{{asset('backend/assets/js/vendor/dropzone.min.js')}}"></script> --}}
         <!-- init js -->
-        <script src="{{asset('backend/assets/js/ui/component.fileupload.js')}}"></script>
+        {{-- <script src="{{asset('backend/assets/js/ui/component.fileupload.js')}}"></script> --}}
         <!-- third party js -->
         <!-- third party js -->
         <script src="{{asset('backend/assets/js/vendor/jquery.dataTables.min.js')}}"></script>

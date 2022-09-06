@@ -8,6 +8,10 @@ use Intervention\Image\Facades\Image;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     function index()
     {
@@ -22,50 +26,57 @@ class CompanyController extends Controller
     }
     function companyStore(Request $request)
     {
-        // return $request;
-        $company_id = Company::insertGetId([
-            'company_name' => $request->company_name,
-            'company_phone' => $request->company_phone,
-            'company_email' => $request->company_email,
-            'company_address' => $request->company_address,
-        ]);
+        $all_company = Company::select('id')->count();
+        if ($all_company < 1) {
 
-        if ($request->mobile_logo) {
-            $mobile_logo = $request->mobile_logo;
-            $extention_mobile_logo = $mobile_logo->getClientOriginalExtension();
-            // echo $extention_mobile_logo;
-            $file_name_mobile_logo = $company_id . '.' . $extention_mobile_logo;
-            Image::make($mobile_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_mobile_logo));
-            Company::find($company_id)->update([
-                'mobile_logo' => $file_name_mobile_logo,
+            // return $request;
+            $company_id = Company::insertGetId([
+                'company_name' => $request->company_name,
+                'company_phone' => $request->company_phone,
+                'company_email' => $request->company_email,
+                'company_address' => $request->company_address,
             ]);
+
+            if ($request->mobile_logo) {
+                $mobile_logo = $request->mobile_logo;
+                $extention_mobile_logo = $mobile_logo->getClientOriginalExtension();
+                // echo $extention_mobile_logo;
+                $file_name_mobile_logo = $company_id . '.' . $extention_mobile_logo;
+                Image::make($mobile_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_mobile_logo));
+                Company::find($company_id)->update([
+                    'mobile_logo' => $file_name_mobile_logo,
+                ]);
+            }
+            if ($request->company_logo) {
+                $company_logo = $request->company_logo;
+                // echo $company_logo;
+                $extention = $company_logo->getClientOriginalExtension();
+                // echo $extention;
+                $file_name_company_logo = $company_id . '.' . $extention;
+                Image::make($company_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_logo));
+                Company::find($company_id)->update([
+                    'company_logo' => $file_name_company_logo,
+                ]);
+            }
+            if ($request->company_favicon) {
+                $company_favicon = $request->company_favicon;
+                $extention_company_favicon = $company_favicon->getClientOriginalExtension();
+                // echo $extention;
+                $file_name_company_favicon = $company_id . '.' . $extention_company_favicon;
+                Image::make($company_favicon)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_favicon));
+                Company::find($company_id)->update([
+                    'company_favicon' => $file_name_company_favicon,
+                ]);
+            }
+            $notification = array(
+                'message' => 'Company  Add Sucessfully!',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('company')->with($notification);
+        } else {
+
+            return back()->with('message', 'Please update');
         }
-        if ($request->company_logo) {
-            $company_logo = $request->company_logo;
-            // echo $company_logo;
-            $extention = $company_logo->getClientOriginalExtension();
-            // echo $extention;
-            $file_name_company_logo = $company_id . '.' . $extention;
-            Image::make($company_logo)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_logo));
-            Company::find($company_id)->update([
-                'company_logo' => $file_name_company_logo,
-            ]);
-        }
-        if ($request->company_favicon) {
-            $company_favicon = $request->company_favicon;
-            $extention_company_favicon = $company_favicon->getClientOriginalExtension();
-            // echo $extention;
-            $file_name_company_favicon = $company_id . '.' . $extention_company_favicon;
-            Image::make($company_favicon)->resize(680, 680)->save(public_path('/uploads/company/' . $file_name_company_favicon));
-            Company::find($company_id)->update([
-                'company_favicon' => $file_name_company_favicon,
-            ]);
-        }
-        $notification = array(
-            'message' => 'Company  Add Sucessfully!',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('company')->with($notification);
     }
 
     function companyEdit($company_id)

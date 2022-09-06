@@ -8,6 +8,10 @@ use Validator;
 
 class BrandController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     function index()
     {

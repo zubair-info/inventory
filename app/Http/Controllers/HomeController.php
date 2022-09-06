@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -82,11 +83,19 @@ class HomeController extends Controller
 
         ]);
 
-        User::find(Auth::id())->update([
+        User::where('id', Auth::id())->update([
             'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
             'updated_at' => Carbon::now(),
         ]);
-        return back()->with('update', 'User Name Update Sucessfully');
+        $notification = array(
+            'message' => 'User Info Update Sucessfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('profile.change')->with($notification);
+        // return back()->with('update', 'User Name Update Sucessfully');
     }
 
     // profile password update
@@ -118,7 +127,12 @@ class HomeController extends Controller
                     'updated_at' => Carbon::now(),
 
                 ]);
-                return back()->with('update', 'Password Update  Sucessfully!!');
+                // return back()->with('update', 'Password Update  Sucessfully!!');
+                $notification = array(
+                    'message' => 'Password Update  Sucessfully!!',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('profile.change')->with($notification);
             }
         } else {
             // echo 'Old Pass Not Correct';
@@ -164,7 +178,33 @@ class HomeController extends Controller
 
     function userUpdate(Request $request)
     {
+        $user_info = User::where('id', $request->user_id)->first();
+        // return $request;
 
+        if ($request->profile_photo) {
+            // print_r($request->all());
+            $uploaded_photo = $request->profile_photo;
+            $extention = $uploaded_photo->getClientOriginalExtension();
+            // echo $extention;
+            $filename = $request->user_id . '.' . $extention;
+            // echo $filename;
+            if ($user_info->profile_photo == "defult.jpg") {
+                // echo $filename;
+                Image::make($uploaded_photo)->save(public_path('/uploads/users/' . $filename));
+
+                DB::table('users')
+                    ->where('id', $request->user_id)
+                    ->update(['profile_photo' => $filename]);
+            } else {
+
+                $delete_form = public_path('uploads/users/' . $user_info->profile_photo);
+                unlink($delete_form);
+                Image::make($uploaded_photo)->save(public_path('/uploads/users/' . $filename));
+                DB::table('users')
+                    ->where('id', $request->user_id)
+                    ->update(['profile_photo' => $filename]);
+            }
+        }
         User::where('id', $request->user_id)->update([
             'name' => $request->name,
             'email' => $request->email,

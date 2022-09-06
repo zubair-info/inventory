@@ -27,7 +27,7 @@
                             <!-- Logo -->
                             <div class="card-header pt-4 pb-4 text-center bg-primary">
                                 <a href="index.html">
-                                    <span> <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="18"></span>
+                                    <span> <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="30"></span>
                                     {{-- <span><img src="assets/images/logo.png" alt="" height="18"></span> --}}
                                 </a>
                             </div>
@@ -36,8 +36,8 @@
                                 
                                 
                                 <div class="text-center w-75 m-auto">
-                                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
-                                    <p class="text-muted mb-4">Don't have an account? Create your account, it takes less than a minute </p>
+                                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Sign Up</h4>
+                                    {{-- <p class="text-muted mb-4">Don't have an account? Create your account, it takes less than a minute </p> --}}
                                 </div>
 
                                 <form method="POST" action="{{ route('register') }}">
@@ -85,7 +85,7 @@
                                     
 
                                     <div class="mb-3 mb-0 text-center">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-md-6 offset-md-3">
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Register') }}
                                             </button>

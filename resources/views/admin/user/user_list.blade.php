@@ -97,7 +97,9 @@
               data: {'status': status, 'user_id': user_id},
               success: function(data){
                 // $('#switch_'+user_id).attr('checked',true);
+                $('checks').attr('checked',true);
                 toastr.success(data.success);
+                // window.location.reload();
                 // console.log(data)
               }
           });

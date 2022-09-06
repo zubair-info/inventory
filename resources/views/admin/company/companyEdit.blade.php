@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="mobile_logo" class="form-label">Company Logo</label>
+                            <label for="mobile_logo" class="form-label">Mobile Logo</label>
                             <input type="file" name="mobile_logo" id="mobile_logo" class="form-control" placeholder="Enter project name">
                             <img src="{{ asset('/uploads/company') }}/{{$all_company->mobile_logo }}"
                             height="90px" alt="">
