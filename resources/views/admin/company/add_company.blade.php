@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('company')
+    
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
@@ -67,6 +69,9 @@
         </div> <!-- end card-->
     </div> <!-- end col-->
 </div>
+@else
+    @include('admin.role.error');
+@endcan 
 
 <!-- end row-->
 @endsection

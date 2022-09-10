@@ -1,25 +1,19 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('product_feature')
+    
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">bitbirds</a></li>
-                    {{-- <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li> --}}
-                    <li class="breadcrumb-item active">Product Feacture</li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">bitBirds</a></li>
+                    <li class="breadcrumb-item active">Product Feature</li>
                 </ol>
             </div>
-            <h4 class="page-title">Product Feacture</h4>
         </div>
     </div>
 </div>
-{{-- <div class="row mb-2">
-    <div class="col-sm-12  mr-5">
-        <a href="{{route('product_feacture_add')}}" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Feacture</a>
-    </div>
-</div> --}}
-
 <div class="row">
     <div class="row">
         <div class="col-12">
@@ -27,11 +21,11 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <h4 class="card-title">Product Feacture  List</h4>
+                            <h4 class="card-title">Manage Product Feature</h4>
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
-                                <a href="{{route('product_feacture_add')}}" class="btn btn-danger mb-3"><i class="mdi mdi-plus-circle me-2"></i> Add Feacture</a>
+                                <a href="{{route('product_feacture_add')}}" class="btn btn-danger mb-3"><i class="mdi mdi-plus-circle me-2"></i> Add Product</a>
                             
                             </div>
                         </div><!-- end col-->
@@ -44,7 +38,7 @@
                                         {{-- <th>Id</th> --}}
                                         <th>Product Name</th>
                                         <th>Category</th>
-                                        <th>Feacture</th>
+                                        <th>Feature</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -74,7 +68,7 @@
                                                             }if($product_feacture->yarn_type==1){
                                                                 echo 'YarnType' . ' <span> , </span> ';
                                                             }if($product_feacture->color==1){
-                                                                echo 'Color' . ' <span> , </span>';
+                                                                echo 'Color' . '<span> , </span>';
                                                             }
                                                             if($product_feacture->weight==1){
                                                                 echo '<span class="weifght_featcure">Weight' .' ( ';
@@ -86,7 +80,7 @@
                                                                 echo ' ) ,</span>';
                                                             }                                                    
                                                             if($product_feacture->cartoon==1){
-                                                                echo '<span class="cartoon_featcure">Cartoon' .' ( ';
+                                                                echo '<span class="cartoon_featcure"> Cartoon' .' ( ';
                                                                 if($product_feacture->cartoon_small==1){
                                                                     echo 'S' .'<span> , </span>';
                                                                 }if($product_feacture->cartoon_medium==1){
@@ -100,15 +94,15 @@
                                                                 }
                                                                 echo ' ) ,</span>';
                                                             }if($product_feacture->box==1){
-                                                                echo 'Box' . ' <span> , </span>';
+                                                                echo ' Box' . ' <span> , </span>';
                                                             }if($product_feacture->dozon){
-                                                                echo 'Dozon' . ' <span> , </span>';
+                                                                echo ' Dozon' . ' <span> , </span>';
                                                             }
                                                             if($product_feacture->pices==1){
-                                                                echo 'Pices' . ' <span> , </span>';
+                                                                echo ' Pices' . ' <span> , </span>';
                                                             }
                                                             if($product_feacture->roll==1){
-                                                                echo 'Roll' . ' <span> , </span>';
+                                                                echo ' Roll' . ' <span> , </span>';
                                                             }
                                                        }else{
                                                         echo 'N/A';
@@ -152,6 +146,7 @@
         </div> <!-- end col-->
     </div>
 </div>
+@endcan
 @endsection
 
 @section('footer_script')
@@ -308,9 +303,6 @@
                     // $('.modal-backdrop').hide();
                     toastr.error(data.success);
                     window.location.reload();
-                    // toastr.success(data.success);
-                    
-
                 }
             });
         });

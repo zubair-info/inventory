@@ -1,8 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@can('home')
 <div class="container">
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Inventory Dashboard') }}</div>
@@ -20,7 +21,8 @@
         </div>
     </div>
 </div>
-
-
+@else
+@include('admin.role.error');
+@endcan
 
 @endsection

@@ -97,24 +97,70 @@
 
                         <li class="side-nav-title side-nav-item">Admin</li>
 
-
+                        @can('user')
+                            <li class="side-nav-item">
+                                <a href="{{ route('user') }}" class="side-nav-link">
+                                    <i class=" dripicons-user"></i>
+                                    <span>User</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('role_manage')
                         <li class="side-nav-item">
-                            <a href="{{ route('user') }}" class="side-nav-link">
+                            <a href="{{ route('role.manage') }}" class="side-nav-link">
                                 <i class=" dripicons-user"></i>
-                                <span>User</span>
+                                <span>Role Manage</span>
                             </a>
+                        </li>
+                        @endcan
+                        @can('company')
                         <li class="side-nav-item">
                             <a href="{{ route('company') }}" class="side-nav-link">
                                 <i class=" uil-copyright"></i>
                                 <span>Setup Company</span>
                             </a>
                         </li>
+                        @endcan
+                        @can('supplier')
+                        <li class="side-nav-item">
+                            <a href="{{ route('supplier') }}" class="side-nav-link">
+                                <i class=" uil-copyright"></i>
+                                <span>Supplier</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('product_feature')
                         <li class="side-nav-item">
                             <a href="{{ route('product_feacture') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
-                                <span>Product Feacture</span>
+                                <span>Product Feature</span>
                             </a>
                         </li>
+                        @endcan
+                        @can('add_product')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_feacture_add') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Add Product</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('department')
+                        <li class="side-nav-item">
+                            <a href="{{ route('department') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Department</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('product_received')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_received') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Product Received</span>
+                            </a>
+                        </li>
+                        @endcan
 
                         {{-- <li class="side-nav-item">
                             <a href="{{ route('brand') }}" class="side-nav-link">
@@ -345,6 +391,7 @@
                                     <i class="dripicons-gear noti-icon"></i>
                                 </a>
                             </li> --}}
+                       
 
                             <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -352,7 +399,7 @@
                                         <img  src="{{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }}" alt="user-image" class="rounded-circle">
                                     </span>
                                     <span>
-                                        <span class="account-user-name">{{ Auth::user()->name }}</span>
+                                        <span class="account-user-name text-capitalize">{{ Auth::user()->name }}</span>
                                         <span class="account-position">Founder</span>
                                     </span>
                                 </a>
@@ -643,9 +690,9 @@
 		</script>
 
         <!-- plugin js -->
-        {{-- <script src="{{asset('backend/assets/js/vendor/dropzone.min.js')}}"></script> --}}
+        <script src="{{asset('backend/assets/js/vendor/dropzone.min.js')}}"></script>
         <!-- init js -->
-        {{-- <script src="{{asset('backend/assets/js/ui/component.fileupload.js')}}"></script> --}}
+        <script src="{{asset('backend/assets/js/ui/component.fileupload.js')}}"></script>
         <!-- third party js -->
         <!-- third party js -->
         <script src="{{asset('backend/assets/js/vendor/jquery.dataTables.min.js')}}"></script>

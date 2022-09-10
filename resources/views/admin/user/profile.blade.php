@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('user')
+    
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
@@ -49,12 +51,12 @@
             <div class="card-body">
                 <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
                     <li class="nav-item">
-                        <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                        <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
                             About
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#timeline" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 active">
+                        <a href="#timeline" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
                             Password
                         </a>
                     </li>
@@ -65,7 +67,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" id="aboutme">
+                    <div class="tab-pane active" id="aboutme">
 
                         <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Personal Info Update</h5>
                         <form action="{{ url('/profile/name/update') }}" method="post">
@@ -99,7 +101,8 @@
                     </div> <!-- end tab-pane -->
                     <!-- end about me section content -->
 
-                    <div class="tab-pane show active" id="timeline">
+                    <div class="tab-pane show" id="timeline">
+                        <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i>Password Change</h5>
                         <form action="{{ url('/profile/password/update') }} " method="post">
                             @csrf
                             <div class="form-group mb-4">
@@ -160,7 +163,7 @@
                                 @error('profile_photo')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
-                                <img src="{{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }}" alt="table-user" height="90" class="mt-1" />
+                                <img src="{{ asset('/uploads/users') }}/{{ Auth::user()->profile_photo }}" alt="table-user" height="60" width="60" class="mt-1" />
                             </div>
                         
                             <div class="text-end">
@@ -176,10 +179,7 @@
     </div> <!-- end col -->
 </div>
 <!-- end row-->
-
-</div>
-<!-- container -->
-
-</div>
-<!-- content -->
+@else
+@include('admin.role.error');
+@endcan
 @endsection

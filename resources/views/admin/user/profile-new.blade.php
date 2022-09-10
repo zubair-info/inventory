@@ -2,7 +2,8 @@
 @extends('layouts.dashboard')
 @section('content')
 
-
+@can('profile-new')
+    
     <div class="content container-fluid mt-5">
         <div class="row">
             <div class="col-xl-4 col-sm-6 col-12">
@@ -104,4 +105,7 @@
         
         
     </div>	
+@else
+    @include('admin.role.error');
+@endcan 
 @endsection

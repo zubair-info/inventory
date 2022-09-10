@@ -27,7 +27,7 @@
                             <!-- Logo -->
                             <div class="card-header pt-4 pb-4 text-center bg-primary">
                                 <a href="index.html">
-                                    <span> <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="30"></span>
+                                    <span> <img  src="https://bitbirds.com/web/wp-content/uploads/2021/11/bitBirds-white-logo-300x77.png" alt="Logo" height="40"></span>
                                     {{-- <span><img src="assets/images/logo.png" alt="" height="18"></span> --}}
                                 </a>
                             </div>

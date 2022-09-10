@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('product_feature')   
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
@@ -10,7 +11,7 @@
                     <li class="breadcrumb-item active">Product Feacture</li>
                 </ol>
             </div>
-            <h4 class="page-title">Product Feacture</h4>
+            <h4 class="page-title">Add Product</h4>
         </div>
     </div>
 </div>
@@ -244,7 +245,7 @@
 
                             <div class="text-sm-end mt-2">
                                 <button type="button" class="btn btn-primary submit">
-                                    <i class="mdi mdi-cash-multiple me-1 submit"></i>Add Feacture</button>
+                                    <i class="mdi mdi-cash-multiple me-1 submit"></i>Add Product</button>
                             </div>
                 
                         </div>
@@ -255,6 +256,9 @@
         </div> <!-- end card-->
     </div> <!-- end col-->
 </div>
+@else
+    @include('admin.role.error');
+@endcan 
 <!-- end row-->
 @endsection
 
@@ -362,11 +366,9 @@
                     }else if($('#weightPoundCheck').prop("checked") == true){
                         console.log("weightPoundCheck is checked.");
                     }else{
-                        // alert('Weight kg  and pound at list one checked')
                         console.log("Weight is unhecked.");
                         toastr.warning("Weight kg  and pound at list one checked");
                         return false;
-
                     }
                 }else if($('#pices').prop("checked") == true){
                     console.log("Pices is checked.");
@@ -376,14 +378,12 @@
                         return false;
                     }
                 }else{
-                    // alert('Weight and pices at list one checked');
                     toastr.warning("Weight and pices at list one checked");
                     console.log("Weight is unhecked.");
                     return false;
                 }
 
-                if($('#cartoon').prop("checked") == true){
-                   
+                if($('#cartoon').prop("checked") == true){                
                     console.log("cartoon is checked.");
                     if($('#cartoon_small').prop("checked") == true){
                         console.log("cartoon_small is checked.");
@@ -391,8 +391,7 @@
                         if(cartoon_small_qty==''){
                             toastr.warning("Cartoon Small Size");
                             return false;
-                        }
-                       
+                        }                   
                     }
                     else if($('#cartoon_medium').prop("checked") == true){
                         console.log("cartoon_medium is checked.");
@@ -400,8 +399,7 @@
                         if(cartoon_medium_qty==''){
                             toastr.warning("Cartoon M Size Requried");
                             return false;
-                        }
-                    
+                        }                
                     }
                     else if($('#cartoon_large').prop("checked") == true){
                         var cartoon_large_qty = $('#cartoon_large_qty').val();
@@ -429,7 +427,6 @@
                     else{
                         toastr.warning("Size at list one checked");
                         return false;
-
                     }
                 }
                 if($('#dozon').prop("checked") == true){
@@ -440,14 +437,6 @@
                         return false;
                     }
                 }
-                // if($('#pices').prop("checked") == true){
-                //     console.log("pices is checked.");
-                //     var pices_qty = $('#pices_qty').val();
-                //     if(pices_qty==''){
-                //         toastr.warning("Pices Value Requried");
-                //         return false;
-                //     }
-                // }
                 if($('#roll').prop("checked") == true){
                     console.log("roll is checked.");
                     var roll_qty = $('#roll_qty').val();
@@ -456,12 +445,10 @@
                         return false;
                     }
                 }
-
             }
         }
         return true;
     }
-
 
     $('input[name="unit_type"]:checked').parent().parent().siblings('.unit_type_check').removeClass('d-none');
     // alert();

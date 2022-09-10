@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('product_feature')   
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
@@ -174,7 +175,7 @@
                                                 <label class="form-check-label" for="cartoon_medium">M</label>
                                             </div>
                                             <div class="form-group mb-2 col-lg-2 d-none cartoon_qty_medium_check" style="margin-left: 23px;">
-                                                <input type="text" class="form-control" value="{{$add_product_feacture->cartoon_medium_qty}}" name="cartoon_medium_qty"  placeholder="Enter quantity ">
+                                                <input type="text" id="cartoon_medium_qty" value="{{$add_product_feacture->cartoon_medium_qty}}"  class="form-control" name="cartoon_medium_qty"  placeholder="Enter quantity ">
                                                 <span style="color:red;" id="cartoon_medium_qty"></span>
                                             </div>
 
@@ -243,7 +244,7 @@
 
                             <div class="text-sm-end mt-2">
                                 <button type="button" class="btn btn-primary submit">
-                                    <i class="mdi mdi-cash-multiple me-1 submit"></i>Update Feacture</button>
+                                    <i class="mdi mdi-cash-multiple me-1 submit"></i>Update Product</button>
                             </div>
                 
                         </div>
@@ -255,6 +256,9 @@
     </div> <!-- end col-->
 </div>
 <!-- end row-->
+@else
+    @include('admin.role.error');
+@endcan 
 @endsection
 
 @section('footer_script')
@@ -361,23 +365,24 @@ $('.submit').on('click',function(){
                     }else if($('#weightPoundCheck').prop("checked") == true){
                         console.log("weightPoundCheck is checked.");
                     }else{
-                        // alert('Weight kg  and pound at list one checked')
                         console.log("Weight is unhecked.");
                         toastr.warning("Weight kg  and pound at list one checked");
                         return false;
-
                     }
                 }else if($('#pices').prop("checked") == true){
                     console.log("Pices is checked.");
+                    var pices_qty = $('#pices_qty').val();
+                    if(pices_qty==''){
+                        toastr.warning("Pices Value Requried");
+                        return false;
+                    }
                 }else{
-                    // alert('Weight and pices at list one checked');
                     toastr.warning("Weight and pices at list one checked");
                     console.log("Weight is unhecked.");
                     return false;
                 }
 
-                if($('#cartoon').prop("checked") == true){
-                   
+                if($('#cartoon').prop("checked") == true){                
                     console.log("cartoon is checked.");
                     if($('#cartoon_small').prop("checked") == true){
                         console.log("cartoon_small is checked.");
@@ -385,17 +390,16 @@ $('.submit').on('click',function(){
                         if(cartoon_small_qty==''){
                             toastr.warning("Cartoon Small Size");
                             return false;
-                        }
-                       
+                        }                   
                     }
                     else if($('#cartoon_medium').prop("checked") == true){
                         console.log("cartoon_medium is checked.");
                         var cartoon_medium_qty = $('#cartoon_medium_qty').val();
+                        alert(cartoon_medium_qty)
                         if(cartoon_medium_qty==''){
                             toastr.warning("Cartoon M Size Requried");
                             return false;
-                        }
-                    
+                        }                
                     }
                     else if($('#cartoon_large').prop("checked") == true){
                         var cartoon_large_qty = $('#cartoon_large_qty').val();
@@ -423,7 +427,6 @@ $('.submit').on('click',function(){
                     else{
                         toastr.warning("Size at list one checked");
                         return false;
-
                     }
                 }
                 if($('#dozon').prop("checked") == true){
@@ -431,14 +434,6 @@ $('.submit').on('click',function(){
                     var dozon_qty = $('#dozon_qty').val();
                     if(dozon_qty==''){
                         toastr.warning("Dozon Value Requried");
-                        return false;
-                    }
-                }
-                if($('#pices').prop("checked") == true){
-                    console.log("pices is checked.");
-                    var pices_qty = $('#pices_qty').val();
-                    if(pices_qty==''){
-                        toastr.warning("Pices Value Requried");
                         return false;
                     }
                 }
@@ -450,7 +445,6 @@ $('.submit').on('click',function(){
                         return false;
                     }
                 }
-
             }
         }
         return true;
@@ -482,8 +476,8 @@ $('.submit').on('click',function(){
     $('input[name="cartoon_exrta_xxl"]:checked').parent().siblings('.cartoon_qty_extra_large_xxl_check').removeClass('d-none'); 
     // $('input[name="weight"]:checked').parent().parent().siblings().siblings('.weiget').removeClass('d-none');
     // $('input[name="unit_type"]:checked'). parent().parent().siblings('unit_type_check').addClass('block');
-//    parent().parent().siblings('unit_type_check').removeClass('d-none');
-//    parent().parent().siblings('unit_type_check').addClass('block');
+    //    parent().parent().siblings('unit_type_check').removeClass('d-none');
+    //    parent().parent().siblings('unit_type_check').addClass('block');
    
     $('input[name="unit_type"]').change(function() {
         var  unit_type =  $('input[name="unit_type"]:checked').val();
