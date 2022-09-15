@@ -28,25 +28,13 @@ class BrandController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 // 'errors' => 'faild',
-                "errors" => $validator->messages()
+                "error" => $validator->errors()->all()
             ]);
-        } else {
-
-            // dd($request);
-            $brand = Brand::create([
-                'brand_name' => $request->brand_name,
-            ]);
-            // $notification = array(
-            //     'message' => 'Brand Name Add Sucessfully!',
-            //     'alert-type' => 'success'
-            // );
-            // return redirect()->route('brand')->with($notification);
-            return response()->json([
-                "success" => 'Brand Name Add Sucessfully!',
-                "brand" => $brand,
-            ]);
-            // return redirect()->route('brand')->with($notification);
         }
+        $brand = Brand::create([
+            'brand_name' => $request->brand_name,
+        ]);
+        return response()->json(['success' => 'Brand created successfully.']);
     }
 
 

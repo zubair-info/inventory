@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Material;
 use Illuminate\Http\Request;
 use Validator;
 
-class DepartmentController extends Controller
+
+class MaterialController extends Controller
 {
+    //
+    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -15,15 +18,15 @@ class DepartmentController extends Controller
     //
     function index()
     {
-        // $brand = Brand::find($id);
-        $all_department = Department::all();
-        return view('admin.department.index', compact('all_department'));
+        // $material = material::find($id);
+        $all_material = Material::all();
+        return view('admin.material.index', compact('all_material'));
     }
 
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'material_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -32,11 +35,11 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::create([
-            'department_name' => $request->department_name,
+        Material::create([
+            'material_name' => $request->material_name,
         ]);
 
-        return response()->json(['success' => 'Department created successfully.']);
+        return response()->json(['success' => 'yarn created successfully.']);
     }
 
 
@@ -44,8 +47,8 @@ class DepartmentController extends Controller
     function edit($id)
     {
         // dd($request);
-        $brand = Department::find($id);
-        return view('admin.brand.edit', compact('brand'));
+        $material = Material::find($id);
+        return view('admin.material.edit', compact('material'));
     }
 
     function update(Request $request)
@@ -53,7 +56,7 @@ class DepartmentController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'material_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,17 +65,17 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::find($request->id)->update([
-            'department_name' => $request->department_name,
+        Material::find($request->id)->update([
+            'material_name' => $request->material_name,
         ]);
 
-        return response()->json(['success' => 'Department Update successfully.']);
+        return response()->json(['success' => 'yarn Update successfully.']);
     }
 
     public function destroy($id)
     {
         // echo $user_id;
-        Department::find($id)->delete();
+        Material::find($id)->delete();
         return response()->json(['success' => 'Delete sucessfull']);
     }
 }

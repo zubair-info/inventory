@@ -98,15 +98,15 @@
                                     <div class="mt-2">
                                         
                                         <div class="form-check form-checkbox-success mb-2 form-check-inline">
-                                            <input type="radio" id="mterial_yes" {{$add_product_feacture->matiral_type=='1' ? 'checked' : ''}} value="1" name="mterial_type" class="form-check-input mterial_type">
+                                            <input type="radio" id="mterial_yes" {{$add_product_feacture->material_type=='1' ? 'checked' : ''}} value="1" name="material_type" class="form-check-input material_type">
                                             <label class="form-check-label"  for="mterial_yes">Yes</label>
                                         </div>
                                         <div class="form-check  form-checkbox-danger mb-2 form-check-inline">
-                                            <input type="radio" id="mterial_no" {{$add_product_feacture->matiral_type=='0' ? 'checked' : ''}} value="0" name="mterial_type" class="form-check-input mterial_type">
+                                            <input type="radio" id="mterial_no" {{$add_product_feacture->material_type=='0' ? 'checked' : ''}} value="0" name="material_type" class="form-check-input material_type">
                                             <label class="form-check-label" for="mterial_no">No</label>
                                         </div>
                                     </div>
-                                    <span style="color:red;" id="mterial_type"></span>
+                                    <span style="color:red;" id="material_type"></span>
 
                                 </div>
                                 <div class="col-lg-3">
@@ -290,12 +290,12 @@ $('.submit').on('click',function(){
                 yarn_type_value = true;    
             }
         }
-        var mterial_type = document.getElementsByName('mterial_type');
-        var mterial_type_value = false;
+        var material_type = document.getElementsByName('material_type');
+        var material_type_value = false;
 
-        for(var i=0; i<mterial_type.length;i++){
-            if(mterial_type[i].checked == true){
-                mterial_type_value = true;    
+        for(var i=0; i<material_type.length;i++){
+            if(material_type[i].checked == true){
+                material_type_value = true;    
             }
         }
         var color = document.getElementsByName('color');
@@ -338,9 +338,9 @@ $('.submit').on('click',function(){
            
             return false;
         }
-        else if(!mterial_type_value){
-            $('.mterial_type').focus();
-            $('#mterial_type').html('Enter Mterial Type');
+        else if(!material_type_value){
+            $('.material_type').focus();
+            $('#material_type').html('Enter Mterial Type');
             return false;
         }
         else if(!color_value){
@@ -488,10 +488,10 @@ $('.submit').on('click',function(){
         if(unit_type==0){
             
 
-            $('input[name="brand"]:checked').val(0);
-            $('input[name="yarn_type"]:checked').val(0);
-            $('input[name="mterial_type"]:checked').val(0);
-            $('input[name="unit_type"]:checked').val(0);
+            // $('input[name="brand"]:checked').val(0);
+            // $('input[name="yarn_type"]:checked').val(0);
+            // $('input[name="material_type"]:checked').val(0);
+            // $('input[name="unit_type"]:checked').val(0);
             $('input[name="weight"]:checked').val(0);
             $('input[name="Weights_kgs"]:checked').val(0);
             $('input[name="Weights_pounds"]:checked').val(0);
@@ -656,7 +656,7 @@ $('.submit').on('click',function(){
     //     var brand =   $('input[name="brand"]:checked').val();
     //     var unit_type =   $('input[name="unit_type"]:checked').val();
     //         $('input[name="yarn_type"]:checked').val();
-    //         $('input[name="mterial_type"]:checked').val();
+    //         $('input[name="material_type"]:checked').val();
     //         $('input[name="unit_type"]:checked').val();
     //         $('input[name="weight"]:checked').val();
     //         $('input[name="Weights_kgs"]:checked').val();

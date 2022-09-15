@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use Validator;
 
-class DepartmentController extends Controller
+class ColorController extends Controller
 {
+    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -15,15 +16,15 @@ class DepartmentController extends Controller
     //
     function index()
     {
-        // $brand = Brand::find($id);
-        $all_department = Department::all();
-        return view('admin.department.index', compact('all_department'));
+        // $material = material::find($id);
+        $all_color = Color::all();
+        return view('admin.color.index', compact('all_color'));
     }
 
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'color_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -32,11 +33,11 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::create([
-            'department_name' => $request->department_name,
+        Color::create([
+            'color_name' => $request->color_name,
         ]);
 
-        return response()->json(['success' => 'Department created successfully.']);
+        return response()->json(['success' => 'Color created successfully.']);
     }
 
 
@@ -44,8 +45,8 @@ class DepartmentController extends Controller
     function edit($id)
     {
         // dd($request);
-        $brand = Department::find($id);
-        return view('admin.brand.edit', compact('brand'));
+        $color = Color::find($id);
+        return view('admin.color.edit', compact('color'));
     }
 
     function update(Request $request)
@@ -53,7 +54,7 @@ class DepartmentController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'color_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,17 +63,17 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::find($request->id)->update([
-            'department_name' => $request->department_name,
+        Color::find($request->id)->update([
+            'color_name' => $request->color_name,
         ]);
 
-        return response()->json(['success' => 'Department Update successfully.']);
+        return response()->json(['success' => 'Color Update successfully.']);
     }
 
     public function destroy($id)
     {
         // echo $user_id;
-        Department::find($id)->delete();
+        Color::find($id)->delete();
         return response()->json(['success' => 'Delete sucessfull']);
     }
 }

@@ -40,6 +40,9 @@
                                 @if (session('inactive_status'))
 									<div class="alert alert-danger">{{session('inactive_status')}}</div>			
 								@endif
+                                @if (session('reset_pass'))
+                                    <div class="alert alert-success">{{session('reset_pass')}}</div>			
+                                @endif
 
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
@@ -57,10 +60,13 @@
 
                                     <div class="mb-3">
                                         {{-- <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your password?</small></a> --}}
-                                        @if (Route::has('password.request'))
+                                        @if (Route::has('userPassReset'))
                                         <a class="text-muted float-end" href="{{ route('password.request') }}"><small>
                                             {{ __('Forgot Your Password?') }}</small>
                                         </a>
+                                        {{-- <a class="text-muted float-end" href="{{ route('userPassReset') }}"><small>
+                                            Forgot Your Password?</small>
+                                        </a> --}}
                                          @endif
                                         <label for="password" class="form-label">Password</label>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -99,6 +105,9 @@
                                 <p class="text-muted">Don't have an account? <a href="{{ route('register') }}" class="text-muted ms-1"><b>Sign Up</b></a></p>
                             </div> <!-- end col -->
                         </div>
+                        {{-- <a class="text-muted float-end" href="{{ route('userPassReset') }}"><small>
+                            Forgot Your Password?</small>
+                        </a> --}}
                         <!-- end row -->
 
 

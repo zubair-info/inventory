@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+@can('brand')
 <div class="content container-fluid">
 					
     <div class="row">
@@ -41,7 +42,7 @@
                                             <form action="{{route('brandNameStore')}}"method="post" id="addform" >
                                                 @csrf
                                             
-                                                <div class="form-group row">
+                                                <div class="form-group row mx-1">
                                                     <label class="form-label">Brand Name</label>
                                                     <input type="text" class="form-control brand_name" name="brand_name"  placeholder="Enter Brand Name :S.F">
                                                     <span style="color:red;" id="brand_error"></span>
@@ -143,7 +144,10 @@
             </div>
         </div>
     </div>    
-</div>		  
+</div>	
+@else
+    @include('admin.role.error');
+@endcan 	  
 @endsection
 
 @section('footer_script')
@@ -172,16 +176,7 @@
                 }else{
                     toastr.success(data.success);
                     window.location.reload();
-                   
-                    // $('#validateform').trigger("reset");  
-                    // $('#brand_error').remove();
-                    // console.log(data);
-                    // var link =   '<tr id="brand_id_' + data.brand.id+ '"><td>' + data.brand.id + '</td><td>' +data.brand.brand_name+ '</td>';
-                    //     link += '<td><a  id="edit-post" href="edit_modal_' + data.brand.id + '" class="btn btn-info">Edit</a></td>';
-                    //     link += '<td><a  id="edit-post" data-bs-target="#delete_modal_' + data.brand.id + '" data-bs-toggle="modal" href="delete_modal_' + data.brand.id + '"  class="btn btn-info btn_delete">D</a></td>';
 
-                    // $('#table_list').append(link);
-                    
                 }
             }
         })

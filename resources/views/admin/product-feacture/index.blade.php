@@ -53,12 +53,12 @@
                                                     .product_feacture span:last-child{
                                                         display: none;
                                                     }
-                                                    .product_feacturespan:last-child{
+                                                    /* .product_feacturespan:last-child{
                                                         display: none;
                                                     }
                                                     .weifght_featcure span:last-child{
                                                         display: none;
-                                                    }
+                                                    } */
                                                 </style>
                                                 <div class="product_feacture">
                                                     @php
@@ -67,20 +67,22 @@
                                                             echo 'Brand' . ' , ';
                                                             }if($product_feacture->yarn_type==1){
                                                                 echo 'YarnType' . ' <span> , </span> ';
+                                                            }if($product_feacture->material_type==1){
+                                                                echo 'Material' . '<span> , </span>';
                                                             }if($product_feacture->color==1){
                                                                 echo 'Color' . '<span> , </span>';
                                                             }
                                                             if($product_feacture->weight==1){
-                                                                echo '<span class="weifght_featcure">Weight' .' ( ';
+                                                                echo '<div class="weifght_featcure">Weight' .' ( ';
                                                                 if($product_feacture->weight_kg==1){
                                                                     echo 'Kg' .'<span> , </span>';
                                                                 }if($product_feacture->weight_pound==1){
-                                                                    echo 'Pound';
+                                                                    echo 'Pound'.'<span> , </span>';
                                                                 }
-                                                                echo ' ) ,</span>';
+                                                                echo ' )</div>';
                                                             }                                                    
                                                             if($product_feacture->cartoon==1){
-                                                                echo '<span class="cartoon_featcure"> Cartoon' .' ( ';
+                                                                echo '<div class="cartoon_featcure"> Cartoon' .' ( ';
                                                                 if($product_feacture->cartoon_small==1){
                                                                     echo 'S' .'<span> , </span>';
                                                                 }if($product_feacture->cartoon_medium==1){
@@ -90,9 +92,9 @@
                                                                 }if($product_feacture->cartoon_exrta_large==1){
                                                                     echo 'XL' .' <span> , </span> ';
                                                                 }if($product_feacture->cartoon_exrta_xxl==1){
-                                                                    echo 'XXL';
+                                                                    echo 'XXL'.' <span> , </span> ';
                                                                 }
-                                                                echo ' ) ,</span>';
+                                                                echo ' ) </div>';
                                                             }if($product_feacture->box==1){
                                                                 echo ' Box' . ' <span> , </span>';
                                                             }if($product_feacture->dozon){

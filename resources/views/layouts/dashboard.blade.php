@@ -129,19 +129,27 @@
                             </a>
                         </li>
                         @endcan
-                        @can('product_feature')
+                        @can('brand')
                         <li class="side-nav-item">
-                            <a href="{{ route('product_feacture') }}" class="side-nav-link">
+                            <a href="{{ route('brand') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
-                                <span>Product Feature</span>
+                                <span>Brand</span>
                             </a>
                         </li>
                         @endcan
-                        @can('add_product')
+                        @can('yarn')
                         <li class="side-nav-item">
-                            <a href="{{ route('product_feacture_add') }}" class="side-nav-link">
+                            <a href="{{ route('yarn') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
-                                <span>Add Product</span>
+                                <span>Yarn</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('material')
+                        <li class="side-nav-item">
+                            <a href="{{ route('material') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Material</span>
                             </a>
                         </li>
                         @endcan
@@ -153,6 +161,40 @@
                             </a>
                         </li>
                         @endcan
+                        @can('color')
+                        <li class="side-nav-item">
+                            <a href="{{ route('color') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Color</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('product_feature')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_feacture') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Product Feature</span>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('add_product')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_feacture_add') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Add Product</span>
+                            </a>
+                        </li>
+                        @endcan
+                        @can('add_product_received')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_received_add') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Add Received Product</span>
+                            </a>
+                        </li>
+                        @endcan
+                       
                         @can('product_received')
                         <li class="side-nav-item">
                             <a href="{{ route('product_received') }}" class="side-nav-link">
@@ -161,6 +203,7 @@
                             </a>
                         </li>
                         @endcan
+                       
 
                         {{-- <li class="side-nav-item">
                             <a href="{{ route('brand') }}" class="side-nav-link">

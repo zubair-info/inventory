@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Yarn;
 use Illuminate\Http\Request;
 use Validator;
 
-class DepartmentController extends Controller
+class YarnController extends Controller
 {
+    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -16,14 +17,14 @@ class DepartmentController extends Controller
     function index()
     {
         // $brand = Brand::find($id);
-        $all_department = Department::all();
-        return view('admin.department.index', compact('all_department'));
+        $all_yarn = Yarn::all();
+        return view('admin.yarn.index', compact('all_yarn'));
     }
 
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'yarn_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -32,11 +33,11 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::create([
-            'department_name' => $request->department_name,
+        Yarn::create([
+            'yarn_name' => $request->yarn_name,
         ]);
 
-        return response()->json(['success' => 'Department created successfully.']);
+        return response()->json(['success' => 'yarn created successfully.']);
     }
 
 
@@ -44,7 +45,7 @@ class DepartmentController extends Controller
     function edit($id)
     {
         // dd($request);
-        $brand = Department::find($id);
+        $brand = Yarn::find($id);
         return view('admin.brand.edit', compact('brand'));
     }
 
@@ -53,7 +54,7 @@ class DepartmentController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'department_name' => 'required',
+            'yarn_name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,17 +63,17 @@ class DepartmentController extends Controller
             ]);
         }
 
-        Department::find($request->id)->update([
-            'department_name' => $request->department_name,
+        Yarn::find($request->id)->update([
+            'yarn_name' => $request->yarn_name,
         ]);
 
-        return response()->json(['success' => 'Department Update successfully.']);
+        return response()->json(['success' => 'yarn Update successfully.']);
     }
 
     public function destroy($id)
     {
         // echo $user_id;
-        Department::find($id)->delete();
+        Yarn::find($id)->delete();
         return response()->json(['success' => 'Delete sucessfull']);
     }
 }

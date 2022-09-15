@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserPassReset;
+use App\Notifications\UserPassNotification;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use DB;
+// use Illuminate\Notifications\Notification;
+use Notification;
 
 class HomeController extends Controller
 {
@@ -216,5 +220,42 @@ class HomeController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('user')->with($notification);
+    }
+
+    function userPassReset()
+    {
+        return view('password_reset');
+    }
+
+    function passwordResetStore(Request $request)
+    {
+        $user = User::where('email', $request->email)->firstOrFail();
+        // return $user;
+        $password_reset = UserPassReset::where('user_id', $user->id)->delete();
+        $password_reset = UserPassReset::create([
+            'user_id' => $user->id,
+            'reset_token' => uniqid(),
+            'created_at' => Carbon::now(),
+        ]);
+        Notification::send($user, new UserPassNotification($password_reset));
+        // return back();
+    }
+
+    function passwordResetForm($token)
+    {
+        return view('password_reset_form', [
+            'token' => $token
+        ]);
+    }
+    function passwordResetUpdate(Request $request)
+    {
+        $user_token = UserPassReset::where('reset_token', $request->reset_token)->firstOrFail();
+        // return $user_token;
+        $user = User::findOrFail($user_token->user_id);
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+        $user_token->delete();
+        // return redirect('/')->with('reset_pass', 'Password Reset Sucessfully!!');
     }
 }

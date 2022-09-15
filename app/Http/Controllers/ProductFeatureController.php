@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductFeature;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Carbon;
 
 class ProductFeatureController extends Controller
 {
@@ -52,7 +53,7 @@ class ProductFeatureController extends Controller
             'description' => $request->description,
             'yarn_type' => $request->yarn_type,
             'brand' => $request->brand,
-            'matiral_type' => $request->mterial_type,
+            'material_type' => $request->material_type,
             'color' => $request->color,
             'unit_type' => $request->unit_type,
             'weight' => $request->weight,
@@ -77,6 +78,7 @@ class ProductFeatureController extends Controller
             'pices_qty' => $request->pices_qty,
             'roll' => $request->roll,
             'roll_qty' => $request->roll_qty,
+            'created_at' => Carbon::now(),
         ]);
         $notification = array(
             'message' => 'Product Feacture Add sucessfull!',

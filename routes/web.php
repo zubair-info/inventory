@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductFeatureController;
+use App\Http\Controllers\ProductReceivedController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\YarnController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +58,10 @@ Route::post('/profile/name/update', [HomeController::class, 'nameChange']);
 Route::post('/profile/password/update', [HomeController::class, 'passwordUpdate']);
 Route::post('/profile/picture/update', [HomeController::class, 'picture_update']);
 Route::post('user/profile/update', [HomeController::class, 'userUpdate'])->name('userUpdate');
+Route::get('user/password/reset', [HomeController::class, 'userPassReset'])->name('userPassReset');
+Route::post('user/password/store', [HomeController::class, 'passwordResetStore'])->name('passwordResetStore');
+Route::get('user/password/reset/form/{token}', [HomeController::class, 'passwordResetForm'])->name('passwordResetForm');
+Route::post('user/password/reset/update', [HomeController::class, 'passwordResetUpdate'])->name('passwordResetUpdate');
 
 // Route::group(['namespace' => 'App\Http\Controllers'], function () {
 //     Route::group(['middleware' => ['auth', 'permission', 'check_status']], function () {
@@ -81,7 +89,14 @@ Route::post('product-feacture-update', [ProductFeatureController::class, 'produc
 Route::get('productFeactureDelete/{id}', [ProductFeatureController::class, 'productFeactureDelete'])->name('productFeactureDelete');
 
 
-//your restricted routes here
+//product received
+Route::get('product-received', [ProductReceivedController::class, 'index'])->name('product_received');
+Route::get('product-received-add', [ProductReceivedController::class, 'product_received_add'])->name('product_received_add');
+Route::post('product-received-store', [ProductReceivedController::class, 'product_received_store'])->name('product_received_store');
+// Route::post('product-received-store', [ProductReceivedController::class, 'store'])->name('cablelists.store');
+
+Route::post('productFeatureSearchData', [ProductReceivedController::class, 'productFeatureSearchData'])->name('productFeatureSearchData');
+
 
 //supplier
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
@@ -103,5 +118,26 @@ Route::get('department', [DepartmentController::class, 'index'])->name('departme
 Route::post('department-store', [DepartmentController::class, 'store'])->name('departmentStore');
 Route::post('/department-update', [DepartmentController::class, 'update'])->name('departmentUpdate');
 Route::get('/departmentDelete/{id}', [DepartmentController::class, 'destroy'])->name('departmentDelete');
+
+
+//yarn
+Route::get('yarn', [YarnController::class, 'index'])->name('yarn');
+Route::post('yarn-store', [YarnController::class, 'store'])->name('yarnStore');
+Route::post('/yarn-update', [YarnController::class, 'update'])->name('yarnUpdate');
+Route::get('/yarnDelete/{id}', [YarnController::class, 'destroy'])->name('yarnDelete');
+
+//yarn
+Route::get('material', [MaterialController::class, 'index'])->name('material');
+Route::post('material-store', [MaterialController::class, 'store'])->name('materialStore');
+Route::post('/material-update', [MaterialController::class, 'update'])->name('materialUpdate');
+Route::get('/materialDelete/{id}', [MaterialController::class, 'destroy'])->name('materialDelete');
+
+
+//yarn
+Route::get('color', [ColorController::class, 'index'])->name('color');
+Route::post('color-store', [ColorController::class, 'store'])->name('colorStore');
+Route::post('/color-update', [ColorController::class, 'update'])->name('colorUpdate');
+Route::get('/colorDelete/{id}', [ColorController::class, 'destroy'])->name('colorDelete');
+
 //     });
 // });

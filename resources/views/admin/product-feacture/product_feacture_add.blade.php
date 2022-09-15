@@ -75,8 +75,6 @@
                                         
                                     </div>
                                     <span style="color:red;" id="yarn_type"></span>
-                            
-
                                 </div>
                                 <div class="col-lg-3">
                                     <h6 class="font-15 mt-3">Brand</h6>
@@ -99,15 +97,15 @@
                                     <div class="mt-2">
                                         
                                         <div class="form-check form-checkbox-success mb-2 form-check-inline">
-                                            <input type="radio" id="material_type_yes" value="1" name="mterial_type" class="form-check-input mterial_type">
+                                            <input type="radio" id="material_type_yes" value="1" name="material_type" class="form-check-input material_type">
                                             <label class="form-check-label"  for="material_type_yes">Yes</label>
                                         </div>
                                         <div class="form-check  form-checkbox-danger mb-2 form-check-inline">
-                                            <input type="radio" id="material_type_no" value="0" name="mterial_type" class="form-check-input mterial_type">
+                                            <input type="radio" id="material_type_no" value="0" name="material_type" class="form-check-input material_type">
                                             <label class="form-check-label" for="material_type_no">No</label>
                                         </div>
                                     </div>
-                                    <span style="color:red;" id="mterial_type"></span>
+                                    <span style="color:red;" id="material_type"></span>
 
 
                                 </div>
@@ -274,7 +272,7 @@
     function check_data(){
         var product_name= $('.product_name').val();
         var category= $('.category').val();
-        var brand =   $('.brand').val();
+        // var brand =   $('.brand').val();
         var brand = document.getElementsByName('brand');
         var brandValue = false;
 
@@ -291,12 +289,12 @@
                 yarn_type_value = true;    
             }
         }
-        var mterial_type = document.getElementsByName('mterial_type');
-        var mterial_type_value = false;
+        var material_type = document.getElementsByName('material_type');
+        var material_type_value = false;
 
-        for(var i=0; i<mterial_type.length;i++){
-            if(mterial_type[i].checked == true){
-                mterial_type_value = true;    
+        for(var i=0; i<material_type.length;i++){
+            if(material_type[i].checked == true){
+                material_type_value = true;    
             }
         }
         var color = document.getElementsByName('color');
@@ -339,9 +337,9 @@
            
             return false;
         }
-        else if(!mterial_type_value){
-            $('.mterial_type').focus();
-            $('#mterial_type').html('Enter Mterial Type');
+        else if(!material_type_value){
+            $('.material_type').focus();
+            $('#material_type').html('Enter Mterial Type');
             return false;
         }
         else if(!color_value){
@@ -470,12 +468,11 @@
             $('.unit_type_check').addClass('block');
         }
         if(unit_type==0){
-            
-
-            $('input[name="brand"]:checked').val(0);
-            $('input[name="yarn_type"]:checked').val(0);
-            $('input[name="mterial_type"]:checked').val(0);
-            $('input[name="unit_type"]:checked').val(0);
+        
+            // $('input[name="brand"]:checked').val(0);
+            // $('input[name="yarn_type"]:checked').val(0);
+            // $('input[name="material_type"]:checked').val(0);
+            // $('input[name="unit_type"]:checked').val(0);
             $('input[name="weight"]:checked').val(0);
             $('input[name="Weights_kgs"]:checked').val(0);
             $('input[name="Weights_pounds"]:checked').val(0);
@@ -633,176 +630,6 @@
             $('input[name="roll"]:checked').val('');
         }
     });
-
-
-
-    //  $('input[name="unit_type"]').change(function() {
-    //     var  unit_type =  $('input[name="unit_type"]:checked').val();
-    //     if(unit_type ==1){       
-    //         $('.unit_type_check').removeClass('d-none');
-    //         $('.unit_type_check').addClass('block');
-    //     }
-    //     if(unit_type==0){
-    //         $('.unit_type_check').removeClass('block');
-    //         $('.unit_type_check').addClass('d-none');
-
-    //         $('input[name="brand"]:checked').val('');
-    //         $('input[name="yarn_type"]:checked').val('');
-    //         $('input[name="mterial_type"]:checked').val('');
-    //         $('input[name="unit_type"]:checked').val('');
-    //         $('input[name="weight"]:checked').val('');
-    //         $('input[name="Weights_kgs"]:checked').val('');
-    //         $('input[name="Weights_pounds"]:checked').val('');
-    //         $('input[name="cartoon"]:checked').val('');
-    //         $('input[name="cartoon"]:checked').val('');
-    //         $('input[name="cartoon_small"]:checked').val('');
-    //         $('input[name="cartoon_medium"]:checked').val('');
-    //         $('input[name="cartoon_large"]:checked').val('');
-    //         $('input[name="cartoon_exrta_large"]:checked').val(''); 
-    //         $('input[name="cartoon_exrta_xxl"]:checked').val(''); 
-    //         $('input[name="box"]:checked').val('');
-    //         $('input[name="dozon"]:checked').val('');
-    //         $('input[name="pices"]:checked').val('');
-    //         $('input[name="roll"]:checked').val('');
-            
-    //         $('input[name="cartoon_qty_small"]').val('');
-    //         $('input[name="cartoon_medium_qty"]').val('');
-    //         $('input[name="cartoon_large_qty"]').val('');
-    //         $('input[name="cartoon_extar_large_qty"]').val('');
-    //         $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-            
-    //     }
-    // });
-    // $('#weight').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.weight_check').removeClass('d-none');
-    //         $('.weight_check').addClass('block');
-    //     } else {
-    //         $('.weight_check').removeClass('block');
-    //         $('.weight_check').addClass('d-none');
-
-    //         $('input[name="weight"]:checked').val('');
-    //         $('input[name="Weights_kgs"]:checked').val('');
-    //         $('input[name="Weights_pounds"]:checked').val('');
-    //         $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-    //     }
-    // });
-    // $('#cartoon').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_check').removeClass('d-none');
-    //         $('.cartoon_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_check').removeClass('block');
-    //         $('.cartoon_check').addClass('d-none');
-    //         $('input[name="cartoon"]:checked').val('');
-    //         $('input[name="cartoon"]:checked').val('');
-    //         $('input[name="cartoon_small"]:checked').val('');
-    //         $('input[name="cartoon_medium"]:checked').val('');
-    //         $('input[name="cartoon_large"]:checked').val('');
-    //         $('input[name="cartoon_exrta_large"]:checked').val(''); 
-    //         $('input[name="cartoon_exrta_xxl"]:checked').val(''); 
-
-    //         $('input[name="cartoon_qty_small"]').val('');
-    //         $('input[name="cartoon_medium_qty"]').val('');
-    //         $('input[name="cartoon_large_qty"]').val('');
-    //         $('input[name="cartoon_extar_large_qty"]').val('');
-    //         $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-    //     }
-    // });
-    // $('input[name="cartoon_small"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_qty_small_check').removeClass('d-none');
-    //         $('.cartoon_qty_small_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_qty_small_check').removeClass('block');
-    //         $('.cartoon_qty_small_check').addClass('d-none');
-    //         $('input[name="cartoon_qty_small"]').val('');
-    //     }
-    // });
-    // $('input[name="cartoon_medium"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_qty_medium_check').removeClass('d-none');
-    //         $('.cartoon_qty_medium_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_qty_medium_check').removeClass('block');
-    //         $('.cartoon_qty_medium_check').addClass('d-none');
-    //         $('input[name="cartoon_medium_qty"]').val('');
-    //     }
-    // });
-    // $('input[name="cartoon_large"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_qty_large_check').removeClass('d-none');
-    //         $('.cartoon_qty_large_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_qty_large_check').removeClass('block');
-    //         $('.cartoon_qty_large_check').addClass('d-none');
-    //         $('input[name="cartoon_large_qty"]').val('');
-    //     }
-    // });
-    // $('input[name="cartoon_exrta_large"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_qty_extra_large_check').removeClass('d-none');
-    //         $('.cartoon_qty_extra_large_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_qty_extra_large_check').removeClass('block');
-    //         $('.cartoon_qty_extra_large_check').addClass('d-none');
-    //         $('input[name="cartoon_extar_large_qty"]').val('');
-    //     }
-    // });
-    // $('input[name="cartoon_exrta_xxl"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.cartoon_qty_extra_large_xxl_check').removeClass('d-none');
-    //         $('.cartoon_qty_extra_large_xxl_check').addClass('block');
-    //     } else {
-    //         $('.cartoon_qty_extra_large_xxl_check').removeClass('block');
-    //         $('.cartoon_qty_extra_large_xxl_check').addClass('d-none');
-    //         $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-    //     }
-    // });
-    // $('input[name="box"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.box_check').removeClass('d-none');
-    //         $('.box_check').addClass('block');
-    //     } else {
-    //         $('.box_check').removeClass('block');
-    //         $('.box_check').addClass('d-none');
-    //         $('input[name="box"]:checked').val('');
-    //     }
-    // });
-    // $('input[name="dozon"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.dozon_check').removeClass('d-none');
-    //         $('.dozon_check').addClass('block');
-    //     } else {
-    //         $('.dozon_check').removeClass('block');
-    //         $('.dozon_check').addClass('d-none');
-    //         $('input[name="dozon"]:checked').val('');
-        
-    //     }
-    // });
-    // $('input[name="pices"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.pices_check').removeClass('d-none');
-    //         $('.pices_check').addClass('block');
-    //     } else {
-    //         $('.pices_check').removeClass('block');
-    //         $('.pices_check').addClass('d-none');
-    //         $('input[name="pices"]:checked').val('');
-           
-    //     }
-    // });
-    // $('input[name="roll"]').click(function() {
-    //     if($(this).is(":checked")) {
-    //         $('.roll_check').removeClass('d-none');
-    //         $('.roll_check').addClass('block');
-    //     } else {
-    //         $('.roll_check').removeClass('block');
-    //         $('.roll_check').addClass('d-none');
-    //         $('input[name="roll"]:checked').val('');
-    //     }
-    // });
-
-
 </script>
 
     
