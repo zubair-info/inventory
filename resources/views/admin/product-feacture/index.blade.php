@@ -32,12 +32,12 @@
                     </div>
                     <div class="row">
                         {{-- <div class="table-responsive"> --}}
-                            <table  id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         {{-- <th>Id</th> --}}
                                         <th>Product Name</th>
-                                        <th>Category</th>
+                                        <th>Suta</th>
                                         <th>Feature</th>
                                         <th>Action</th>
                                     </tr>

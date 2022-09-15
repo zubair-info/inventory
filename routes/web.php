@@ -92,10 +92,10 @@ Route::get('productFeactureDelete/{id}', [ProductFeatureController::class, 'prod
 //product received
 Route::get('product-received', [ProductReceivedController::class, 'index'])->name('product_received');
 Route::get('product-received-add', [ProductReceivedController::class, 'product_received_add'])->name('product_received_add');
+Route::post('productFeatureSearchData', [ProductReceivedController::class, 'productFeatureSearchData'])->name('productFeatureSearchData');
 Route::post('product-received-store', [ProductReceivedController::class, 'product_received_store'])->name('product_received_store');
 // Route::post('product-received-store', [ProductReceivedController::class, 'store'])->name('cablelists.store');
 
-Route::post('productFeatureSearchData', [ProductReceivedController::class, 'productFeatureSearchData'])->name('productFeatureSearchData');
 
 
 //supplier

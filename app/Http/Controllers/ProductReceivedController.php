@@ -12,29 +12,30 @@ use App\Models\Supplier;
 use App\Models\Yarn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class ProductReceivedController extends Controller
 {
     //
     function index()
     {
-        $all_supplier_buyer = Supplier::all();
-        $all_department = Department::all();
-        $all_brand = Brand::all();
-        $all_yarn = Yarn::all();
-        $all_material = Material::all();
-        $all_color = Color::all();
-        $add_all_product = ProductFeature::get();
-        $cablenames  = ProductReceived::get();
+        // $all_supplier_buyer = Supplier::all();
+        // $all_department = Department::all();
+        // $all_brand = Brand::all();
+        // $all_yarn = Yarn::all();
+        // $all_material = Material::all();
+        // $all_color = Color::all();
+        // $add_all_product = ProductFeature::get();
+        $all_product_received = ProductReceived::get();
         return view('admin.product-received.index', [
-            'all_supplier_buyer' => $all_supplier_buyer,
-            'all_department' => $all_department,
-            'all_brand' => $all_brand,
-            'all_yarn' => $all_yarn,
-            'all_material' => $all_material,
-            'all_color' => $all_color,
-            'cablenames' => $cablenames,
-            'add_all_product' => $add_all_product,
+            // 'all_supplier_buyer' => $all_supplier_buyer,
+            // 'all_department' => $all_department,
+            // 'all_brand' => $all_brand,
+            // 'all_yarn' => $all_yarn,
+            // 'all_material' => $all_material,
+            // 'all_color' => $all_color,
+            // 'add_all_product' => $add_all_product,
+            'all_product_received' => $all_product_received,
         ]);
     }
 
@@ -49,7 +50,7 @@ class ProductReceivedController extends Controller
         $all_color = Color::all();
         $add_all_product = ProductFeature::get();
         $cablenames  = ProductReceived::get();
-        return view('admin.product-received.index', [
+        return view('admin.product-received.product_received_add', [
             'all_supplier_buyer' => $all_supplier_buyer,
             'all_department' => $all_department,
             'all_brand' => $all_brand,
@@ -64,7 +65,7 @@ class ProductReceivedController extends Controller
     function product_received_store(Request $request)
     {
 
-        return $request;
+        // return $request;
 
         $form_count = $request->form_count;
         $product_uid = $request->product_uid;
@@ -79,129 +80,175 @@ class ProductReceivedController extends Controller
         $material_type_id = $request->material_type_id;
         $color_id = $request->color_id;
         $unit_type = $request->unit_type;
-        $dozon = $request->dozon;
-        $pices = $request->pices;
-        $weight = $request->weight;
-        $weight_kg = $request->weight_kg;
-        $weight_kg_qty = $request->weight_kg_qty;
-        $weight_pound = $request->weight_pound;
-        $weight_pound_qty = $request->weight_pound_qty;
-        // $weight = $request->weight_ . $form_count;
-        // $weight_kg = $request->weight_kg_ . $form_count;
-        // $weight_kg_qty = $request->weight_kg_qty_ . $form_count;
-        // $weight_pound = $request->weight_pound_ . $form_count;
-        // $weight_pound_qty = $request->weight_pound_qty_ . $form_count;
-        $cartoon = $request->cartoon;
-        $cartoon_small = $request->cartoon_small;
-        $cartoon_qty_small = $request->cartoon_qty_small;
         $rate = $request->rate;
-        // dd($request);
-        for ($i = 0; $i < count($form_count); $i++) {
-            if (isset($weight[$i])) {
-                $weight = $weight[$i];
+        for ($i = 0; $i <= $form_count; $i++) {
+
+            $weight = "weight_" . $i;
+
+            if (isset($request->$weight)) {
+                $weight = $request->$weight;
             } else {
                 $weight = NULL;
             }
-            if (isset($weight_kg[$i])) {
-                $weight_kg = $weight_kg[$i];
+
+            $weight_kg = "weight_kg_" . $i;
+            if (isset($request->$weight_kg)) {
+                $weight_kg = $request->$weight_kg;
             } else {
                 $weight_kg = NULL;
             }
-            if (isset($weight_kg_qty[$i])) {
-                $weight_kg_qty = $weight_kg_qty[$i];
+            $weight_kg_qty = "weight_kg_qty_" . $i;
+            if (isset($request->$weight_kg_qty)) {
+                $weight_kg_qty = $request->$weight_kg_qty;
             } else {
                 $weight_kg_qty = NULL;
             }
-            if (isset($weight_pound[$i])) {
-                $weight_pound = $weight_pound[$i];
+            $weight_pound = "weight_pound_" . $i;
+            if (isset($request->$weight_pound)) {
+                $weight_pound = $request->$weight_pound;
             } else {
                 $weight_pound = NULL;
             }
-            if (isset($weight_pound_qty[$i])) {
-                $weight_pound_qty = $weight_pound_qty[$i];
+            $weight_pound_qty = "weight_pound_qty_" . $i;
+            if (isset($request->$weight_pound_qty)) {
+                $weight_pound_qty = $request->$weight_pound_qty;
             } else {
                 $weight_pound_qty = NULL;
             }
-            if (isset($cartoon[$i])) {
-                $cartoon = $cartoon[$i];
+            $cartoon = "cartoon_" . $i;
+            if (isset($request->$cartoon)) {
+                $cartoon = $request->$cartoon;
             } else {
                 $cartoon = NULL;
             }
-            if (isset($cartoon_small[$i])) {
-                $cartoon_small = $cartoon_small[$i];
+            $cartoon_small = "cartoon_small_" . $i;
+            if (isset($request->$cartoon_small)) {
+                $cartoon_small = $request->$cartoon_small;
             } else {
                 $cartoon_small = NULL;
             }
-            if (isset($cartoon_qty_small[$i])) {
-                $cartoon_qty_small = $cartoon_qty_small[$i];
+            $cartoon_qty_small = "cartoon_qty_small_" . $i;
+            if (isset($request->$cartoon_qty_small)) {
+                $cartoon_qty_small = $request->$cartoon_qty_small;
             } else {
                 $cartoon_qty_small = NULL;
             }
-            if (isset($cartoon_medium[$i])) {
-                $cartoon_medium = $cartoon_medium[$i];
+            $cartoon_medium = "cartoon_medium_" . $i;
+            if (isset($request->$cartoon_medium)) {
+                $cartoon_qty_small = $request->$cartoon_medium;
             } else {
                 $cartoon_medium = NULL;
             }
-            if (isset($cartoon_medium_qty[$i])) {
-                $cartoon_medium_qty = $cartoon_medium_qty[$i];
+            $cartoon_medium_qty = "cartoon_medium_qty_" . $i;
+            if (isset($request->$cartoon_medium_qty)) {
+                $cartoon_medium_qty = $request->$cartoon_medium_qty;
             } else {
                 $cartoon_medium_qty = NULL;
             }
-            if (isset($cartoon_large[$i])) {
-                $cartoon_large = $cartoon_large[$i];
+            $cartoon_large = "cartoon_large_" . $i;
+            if (isset($request->$cartoon_large)) {
+                $cartoon_large = $request->$cartoon_large;
             } else {
                 $cartoon_large = NULL;
             }
-            if (isset($cartoon_large_qty[$i])) {
-                $cartoon_large_qty = $cartoon_large_qty[$i];
+            $cartoon_large_qty = "cartoon_large_qty_" . $i;
+            if (isset($request->$cartoon_large_qty)) {
+                $cartoon_large_qty = $request->$cartoon_large_qty;
             } else {
                 $cartoon_large_qty = NULL;
             }
-            if (isset($cartoon_exrta_large[$i])) {
-                $cartoon_exrta_large = $cartoon_exrta_large[$i];
+            $cartoon_exrta_large = "cartoon_exrta_large_" . $i;
+            if (isset($request->$cartoon_exrta_large)) {
+                $cartoon_exrta_large = $request->$cartoon_exrta_large;
             } else {
                 $cartoon_exrta_large = NULL;
             }
-            if (isset($cartoon_extar_large_qty[$i])) {
-                $cartoon_extar_large_qty = $cartoon_extar_large_qty[$i];
+            $cartoon_extar_large_qty = "cartoon_extar_large_qty_" . $i;
+            if (isset($request->$cartoon_extar_large_qty)) {
+                $cartoon_extar_large_qty = $request->$cartoon_extar_large_qty;
             } else {
                 $cartoon_extar_large_qty = NULL;
             }
-            if (isset($cartoon_exrta_xxl[$i])) {
-                $cartoon_exrta_xxl = $cartoon_exrta_xxl[$i];
+            $cartoon_exrta_xxl = "cartoon_exrta_xxl_" . $i;
+            if (isset($request->$cartoon_exrta_xxl)) {
+                $cartoon_exrta_xxl = $request->$cartoon_exrta_xxl;
             } else {
                 $cartoon_exrta_xxl = NULL;
             }
-            if (isset($cartoon_extar_large_xxl_qty[$i])) {
-                $cartoon_extar_large_xxl_qty = $cartoon_extar_large_xxl_qty[$i];
+            $cartoon_extar_large_xxl_qty = "cartoon_extar_large_xxl_qty_" . $i;
+            if (isset($request->$cartoon_extar_large_xxl_qty)) {
+                $cartoon_extar_large_xxl_qty = $request->$cartoon_extar_large_xxl_qty;
             } else {
                 $cartoon_extar_large_xxl_qty = NULL;
             }
-            if (isset($dozon[$i])) {
-                $dozon = $dozon[$i];
+            $dozon = "dozon_" . $i;
+            if (isset($request->$dozon)) {
+                $dozon = $request->$dozon;
+            } else {
+                $dozon = NULL;
+            }
+            $dozon_qty = "dozon_qty_" . $i;
+            if (isset($request->$dozon_qty)) {
+                $dozon_qty = $request->$dozon_qty;
             } else {
                 $dozon_qty = NULL;
             }
-            if (isset($dozon_qty[$i])) {
-                $dozon_qty = $dozon_qty[$i];
-            } else {
-                $dozon_qty = NULL;
-            }
-            if (isset($pices[$i])) {
-                $pices = $pices[$i];
+            $pices = "pices_" . $i;
+            if (isset($request->$pices)) {
+                $pices = $request->$pices;
             } else {
                 $pices = NULL;
             }
-            if (isset($pices_qty[$i])) {
-                $pices_qty = $pices_qty[$i];
+            $pices_qty = "pices_qty_" . $i;
+            if (isset($request->$pices_qty)) {
+                $pices_qty = $request->$pices_qty;
             } else {
                 $pices_qty = NULL;
             }
-            if (isset($rate[$i])) {
-                $rate = $rate[$i];
+            $box = "box_" . $i;
+            if (isset($request->$box)) {
+                $box = $request->$box;
             } else {
-                $rate = NULL;
+                $box = NULL;
             }
+            $box_qty = "box_qty_" . $i;
+            if (isset($request->$box_qty)) {
+                $box_qty = $request->$box_qty;
+            } else {
+                $box_qty = NULL;
+            }
+            $roll = "roll_" . $i;
+            if (isset($request->$roll)) {
+                $roll = $request->$roll;
+            } else {
+                $roll = NULL;
+            }
+            $roll_qty = "roll_qty_" . $i;
+            if (isset($request->$roll_qty)) {
+                $roll_qty = $request->$roll_qty;
+            } else {
+                $roll_qty = NULL;
+            }
+
+            // $validator = Validator::make($request->all(), [
+            //     'received_chalan_id' => 'required',
+            //     'product_received' => 'required',
+            //     'department_id' => 'required',
+            //     'yarn_type_id' => 'required',
+            //     'brand_id' => 'required',
+            // ]);
+            // $validator = Validator::make($request->input());
+            // dd($request->input());
+
+            // if ($validator->fails()) {
+            //     return response()->json([
+            //         'error' => $validator->errors()->all()
+            //     ]);
+            // }
+            // if ($validator->fails()) {
+            //     return Response::json(array('edit_errors' => $validator->getMessageBag()->toArray()));
+            // }
+
             ProductReceived::insert([
                 'product_uid' => $request->product_uid,
                 'received_chalan_id' => $request->received_chalan_id,
@@ -232,14 +279,25 @@ class ProductReceivedController extends Controller
                 'cartoon_extar_large_qty' => $cartoon_extar_large_qty,
                 'cartoon_exrta_xxl' => $cartoon_exrta_xxl,
                 'cartoon_extar_large_xxl_qty' => $cartoon_extar_large_xxl_qty,
-                'dozon_qty' => $dozon_qty,
                 'dozon' => $dozon,
+                'dozon_qty' => $dozon_qty,
                 'pices' => $pices,
                 'pices_qty' => $pices_qty,
-                'rate' => $rate,
+                'box' => $box,
+                'box_qty' => $box_qty,
+                'roll' => $roll,
+                'roll_qty' => $roll_qty,
+                'rate' => $rate[$i],
                 'created_at' => Carbon::now(),
             ]);
         }
+
+        $notification = array(
+            'message' => 'Add Product Received Sucessfully!',
+            'alert-type' => 'success'
+        );
+        // return redirect()->route('product_received_add')->with($notification);
+        return response()->json(['success' => $notification]);
     }
 
     function productFeatureSearchData(Request $request)

@@ -26,6 +26,8 @@
         <link href="{{asset('backend/assets/css/vendor/select.bootstrap5.css" rel="stylesheet')}}" type="text/css" />
         {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" /> --}}
+        {{-- <script src="/js/validate.js"></script> --}}
+      
          
 <style>
     #basic-datatable_paginate{
@@ -754,6 +756,7 @@
         <!-- demo app -->
         <script src="{{asset('backend/assets/js/pages/demo.datatable-init.js')}}"></script>
         <!-- end demo js-->
+        {{-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script> --}}
         @yield('footer_script')
         
     </body>
