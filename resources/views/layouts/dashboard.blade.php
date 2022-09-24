@@ -27,14 +27,15 @@
         {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" /> --}}
         {{-- <script src="/js/validate.js"></script> --}}
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
       
          
-<style>
-    #basic-datatable_paginate{
-        display: flex;
-         justify-content: end;
-    }
-</style>
+        <style>
+            #basic-datatable_paginate{
+                display: flex;
+                justify-content: end;
+            }
+        </style>
     </head>
 
     <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -757,6 +758,8 @@
         <script src="{{asset('backend/assets/js/pages/demo.datatable-init.js')}}"></script>
         <!-- end demo js-->
         {{-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script> --}}
+        
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         @yield('footer_script')
         
     </body>

@@ -32,12 +32,12 @@
                     </div>
                     <div class="row">
                         {{-- <div class="table-responsive"> --}}
-                            <table class="table dt-responsive nowrap w-100">
+                            <table  id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         {{-- <th>Id</th> --}}
                                         <th>Product Name</th>
-                                        <th>Suta</th>
+                                        <th>Category</th>
                                         <th>Feature</th>
                                         <th>Action</th>
                                     </tr>
@@ -53,12 +53,12 @@
                                                     .product_feacture span:last-child{
                                                         display: none;
                                                     }
-                                                    /* .product_feacturespan:last-child{
-                                                        display: none;
-                                                    }
                                                     .weifght_featcure span:last-child{
                                                         display: none;
-                                                    } */
+                                                    }
+                                                    .cartoon_featcure span:last-child{
+                                                        display: none;
+                                                    } 
                                                 </style>
                                                 <div class="product_feacture">
                                                     @php
