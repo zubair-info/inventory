@@ -59,6 +59,7 @@ class ProductFeatureController extends Controller
             'weight' => $request->weight,
             'weight_kg' => $request->Weights_kgs,
             'weight_pound' => $request->Weights_pounds,
+            'weight_pound_qty' => $request->weight_pound_qty,
             'cartoon' => $request->cartoon,
             'cartoon_small' => $request->cartoon_small,
             'cartoon_qty_small' => $request->cartoon_qty_small,
@@ -101,13 +102,12 @@ class ProductFeatureController extends Controller
     {
         // return $request;
         ProductFeature::find($request->product_feacture_id)->update([
-
             'product_name' => $request->product_name,
             'category' => $request->category,
             'description' => $request->description,
             'yarn_type' => $request->yarn_type,
             'brand' => $request->brand,
-            'matiral_type' => $request->mterial_type,
+            'material_type' => $request->material_type,
             'color' => $request->color,
             'unit_type' => $request->unit_type,
             'weight' => $request->weight,
@@ -132,6 +132,7 @@ class ProductFeatureController extends Controller
             'pices_qty' => $request->pices_qty,
             'roll' => $request->roll,
             'roll_qty' => $request->roll_qty,
+            'updated_at' => Carbon::now(),
         ]);
         $notification = array(
             'message' => 'Product Feacture Update sucessfull!',

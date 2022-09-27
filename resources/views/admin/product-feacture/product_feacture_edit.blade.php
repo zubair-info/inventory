@@ -225,10 +225,10 @@
                                             <input type="checkbox" {{$add_product_feacture->pices=='1' ? 'checked' : ''}} name="pices" value="1" class="form-check-input" id="pices">
                                             <label class="form-check-label" for="pices">Pices</label>
                                         </div>
-                                        <div class="form-group mb-2 col-lg-2 d-none pices_check" style="margin-left: 23px;">
+                                        {{-- <div class="form-group mb-2 col-lg-2 d-none pices_check" style="margin-left: 23px;">
                                             <input type="text"  value="{{$add_product_feacture->pices_qty}}" class="form-control" id="pices_qty" name="pices_qty"  placeholder="Enter quantity ">
                                             <span style="color:red;" id="pices_qty"></span>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-check form-checkbox-success mb-2 form-check-inline">
                                             <input type="checkbox" {{$add_product_feacture->roll=='1' ? 'checked' : ''}}  name="roll" value="1" id="roll" class="form-check-input" id="roll">
                                             <label class="form-check-label" for="roll">Roll</label>
@@ -371,11 +371,11 @@ $('.submit').on('click',function(){
                     }
                 }else if($('#pices').prop("checked") == true){
                     console.log("Pices is checked.");
-                    var pices_qty = $('#pices_qty').val();
-                    if(pices_qty==''){
-                        toastr.warning("Pices Value Requried");
-                        return false;
-                    }
+                    // var pices_qty = $('#pices_qty').val();
+                    // if(pices_qty==''){
+                    //     toastr.warning("Pices Value Requried");
+                    //     return false;
+                    // }
                 }else{
                     toastr.warning("Weight and pices at list one checked");
                     console.log("Weight is unhecked.");
@@ -449,8 +449,6 @@ $('.submit').on('click',function(){
         }
         return true;
     }
-    //   $('input[name="weight"]:checked').attr("required", "true");
-    // alert($('input[name="unit_type"]:checked').val());
    var unit_type =  $('input[name="unit_type"]:checked').val();
    if(unit_type==1){
        $('input[name="unit_type"]:checked').parent().parent().siblings('.unit_type_check').removeClass('d-none');
@@ -460,9 +458,6 @@ $('.submit').on('click',function(){
         $('input[name="unit_type"]:checked').parent().parent().siblings('.unit_type_check').removeClass('block');
         $('input[name="unit_type"]:checked').parent().parent().siblings('.unit_type_check').addClass('d-none');
    }
-
-
-    // alert();
     $('input[name="weight"]:checked').parent().siblings('.weight_check').removeClass('d-none');
     $('input[name="cartoon"]:checked').parent().siblings('.cartoon_check').removeClass('d-none');
     $('input[name="box"]:checked').parent().siblings('.box_check').removeClass('d-none');
@@ -474,11 +469,6 @@ $('.submit').on('click',function(){
     $('input[name="cartoon_large"]:checked').parent().siblings('.cartoon_qty_large_check').removeClass('d-none');
     $('input[name="cartoon_exrta_large"]:checked').parent().siblings('.cartoon_qty_extra_large_check').removeClass('d-none'); 
     $('input[name="cartoon_exrta_xxl"]:checked').parent().siblings('.cartoon_qty_extra_large_xxl_check').removeClass('d-none'); 
-    // $('input[name="weight"]:checked').parent().parent().siblings().siblings('.weiget').removeClass('d-none');
-    // $('input[name="unit_type"]:checked'). parent().parent().siblings('unit_type_check').addClass('block');
-    //    parent().parent().siblings('unit_type_check').removeClass('d-none');
-    //    parent().parent().siblings('unit_type_check').addClass('block');
-   
     $('input[name="unit_type"]').change(function() {
         var  unit_type =  $('input[name="unit_type"]:checked').val();
         if(unit_type ==1){       
@@ -486,12 +476,6 @@ $('.submit').on('click',function(){
             $('.unit_type_check').addClass('block');
         }
         if(unit_type==0){
-            
-
-            // $('input[name="brand"]:checked').val(0);
-            // $('input[name="yarn_type"]:checked').val(0);
-            // $('input[name="material_type"]:checked').val(0);
-            // $('input[name="unit_type"]:checked').val(0);
             $('input[name="weight"]:checked').val(0);
             $('input[name="Weights_kgs"]:checked').val(0);
             $('input[name="Weights_pounds"]:checked').val(0);
@@ -506,18 +490,15 @@ $('.submit').on('click',function(){
             $('input[name="dozon"]:checked').val(0);
             $('input[name="pices"]:checked').val(0);
             $('input[name="roll"]:checked').val(0);
-            
             $('input[name="cartoon_qty_small"]').val('');
             $('input[name="cartoon_medium_qty"]').val('');
             $('input[name="cartoon_large_qty"]').val('');
             $('input[name="cartoon_extar_large_qty"]').val('');
             $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-
             $('.unit_type_check').removeClass('block');
             $('.unit_type_check').addClass('d-none');
             $('#unit_type_check').removeClass('block');
-            $('#unit_type_check').addClass('d-none');
-            
+            $('#unit_type_check').addClass('d-none'); 
         }
     });
     $('#weight').click(function() {
@@ -525,7 +506,6 @@ $('.submit').on('click',function(){
         if($(this).is(":checked")) {
             $('.weight_check').removeClass('d-none');
             $('.weight_check').addClass('block');
-            // $('input[name="weight"]:checked').attr("required", "true");
         } else {
             $('.weight_check').removeClass('block');
             $('.weight_check').addClass('d-none');
@@ -533,8 +513,6 @@ $('.submit').on('click',function(){
             $('input[name="weight"]:checked').val('');
             $('input[name="Weights_kgs"]:checked').val('');
             $('input[name="Weights_pounds"]:checked').val('');
-            $('input[name="cartoon_extar_large_xxl_qty"]').val('');
-            // $('input[name="weight"]:checked').attr("required", "false");
         }
     });
     $('#cartoon').click(function() {
@@ -651,39 +629,7 @@ $('.submit').on('click',function(){
             $('input[name="roll"]:checked').val('');
         }
     });
-    // $( ".submit" ).click(function() {
-    //     var product_name= $('.product_name').val();
-    //     var brand =   $('input[name="brand"]:checked').val();
-    //     var unit_type =   $('input[name="unit_type"]:checked').val();
-    //         $('input[name="yarn_type"]:checked').val();
-    //         $('input[name="material_type"]:checked').val();
-    //         $('input[name="unit_type"]:checked').val();
-    //         $('input[name="weight"]:checked').val();
-    //         $('input[name="Weights_kgs"]:checked').val();
-    //         $('input[name="Weights_pounds"]:checked').val();
-    //     if(product_name==''){
-    //         $('.product_name').attr("required", "true");
-    //         $('.product_name').css('border','1px solid red');
-
-    //     }else{
-    //         // $('.submit').attr( 'type','submit');
-    //     }
-    //     if(brand==''){
-    //         $('.brand').attr("required", "true");
-    //         $('.brand').css('border','1px solid red');
-    //     }
-    //     if(unit_type==''){
-    //         $('.unit_type').attr("required", "true");
-    //         $('.unit_type').css('border','1px solid red');
-    //     }
-    //     // $('.submit').attr( 'type','submit');
-       
-    // });
-
-    
-
 
 </script>
-
-    
+ 
 @endsection

@@ -9,6 +9,7 @@ class ProductReceived extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
     function rel_to_yarn()
     {
         return $this->belongsTo(Yarn::class, 'yarn_type_id');

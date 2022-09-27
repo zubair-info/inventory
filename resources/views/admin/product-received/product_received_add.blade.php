@@ -8,9 +8,10 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">bitBirds</a></li>
-                    <li class="breadcrumb-item active">Product Received</li>
+                    <li class="breadcrumb-item active">Add Product Received</li>
                 </ol>
             </div>
+            <h4 class="page-title">Add Product Received</h4>
         </div>
     </div>
 </div>
@@ -359,7 +360,7 @@
                 
                 html = '<tr>';
                 // html += '<input type="hidden" name="form_count" id="form_count" value="'+count+'" class="form-control form-control-sm">';
-                html += '<td style="width:15%;"><input type="text" name="product_name_'+count+'" value="'+data.success.product_name+'" class="form-control form-control-sm"  readonly><span style="color:red;" class="yarn_type_id_error_'+count+'"></span></td>';
+                html += '<td style="width:15%;"><input type="text" name="product_name_'+count+'" value="'+data.success.product_name+'" class="form-control"  readonly><span style="color:red;" class="yarn_type_id_error_'+count+'"></span></td>';
                 
                 if(data.success.yarn_type==1){
                     
@@ -408,55 +409,43 @@
                 }
 
                 if(data.success.unit_type==1){
-                    html +='<td>';
+                    html +='<td style="width: 12%;">';
                             
                     html += '<input type="hidden" id="unit_type" name="unit_type_'+count+'" value="'+data.success.unit_type+'" class="form-control form-control-sm" >';
-                    if(data.success.weight==1){
-                                
-                        html += '<input type="hidden"  name="weight_'+count+'" value="'+data.success.weight+'" class="form-control form-control-sm" >';
-                        if(data.success.weight_kg){
-                                html += '<input type="hidden" name="weight_kg_'+count+'" value="'+data.success.weight_kg+'" class="form-control form-control-sm">';
-                                html +='<label class="form-label">Weight(kg)</label><input type="text" id="weight_kg_qty_'+count+'" name="weight_kg_qty_'+count+'" placeholder="Kg Qty" class="form-control form-control-sm" id="weight_kg" >';
-                                html += '<span class="weight_kg_qty_error"></span>';
-                        }
-                        if(data.success.weight_pound){
-                            html += '<input type="hidden" name="weight_pound_'+count+'" value="'+data.success.weight_pound+'" class="form-control form-control-sm">';
-                            html +='<label class="form-label">Weight(pound)</label><input type="text" name="weight_pound_qty_'+count+'" placeholder="Pound Qty" class="form-control form-control-sm" id="weight_pound" >';
-                        }
-                    }
+                    
                     if(data.success.cartoon==1){
                             html += '<input type="hidden" name="cartoon_'+count+'" value="'+data.success.cartoon+'" class="form-control form-control-sm" >';
                         if(data.success.cartoon_small==1){
                             html += '<input type="hidden" name="cartoon_small_'+count+'" value="'+data.success.cartoon_small+'" class="form-control form-control-sm" >';
                             if(data.success.cartoon_qty_small){
-                                html +='<label class="form-label">Cartoon(S)</label><input type="text" name="cartoon_qty_small_'+count+'" placeholder="Small Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="colFormLabelSm" >';
+                                html +='<label class="form-label">Cartoon(S)</label><input cartoon_qty_small="'+data.success.cartoon_qty_small+'" pices_stock="'+data.success.pices_qty+'" type="text" name="cartoon_qty_small_'+count+'" placeholder="Small Qty" class="form-control form-control-sm cartoon_qty_small_'+count+'" id="colFormLabelSm" >';
                             }
                         }
                         if(data.success.cartoon_medium==1){
                             html += '<input type="hidden" name="cartoon_medium_'+count+'" value="'+data.success.cartoon_medium+'" class="form-control form-control-sm" >';
                             if(data.success.cartoon_medium_qty){
-                                html +='<label  class="form-label">>Cartoon(M)</label><input type="text" name="cartoon_medium_qty_'+count+'" placeholder="Medium Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="colFormLabelSm" >';
+                                html +='<label  class="form-label">Cartoon(M)</label><input cartoon_medium_qty="'+data.success.cartoon_medium_qty+'" pices_stock="'+data.success.pices_qty+'" type="text" name="cartoon_medium_qty_'+count+'" placeholder="Medium Qty" class="form-control form-control-sm cartoon_medium_qty_'+count+'" id="colFormLabelSm" >';
                             }
                             
                         }
                         if(data.success.cartoon_large==1){
                             html += '<input type="hidden" name="cartoon_large_'+count+'" value="'+data.success.cartoon_large+'" class="form-control form-control-sm" >';
                             if(data.success.cartoon_large_qty){
-                                html +='<label  class="form-label">Cartoon(L)</label><input type="text" name="cartoon_large_qty_'+count+'" placeholder="Large Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="colFormLabelSm" >';
+                                html +='<label  class="form-label">Cartoon(L)</label><input cartoon_large_qty="'+data.success.cartoon_large_qty+'" pices_stock="'+data.success.pices_qty+'" type="text" name="cartoon_large_qty_'+count+'" placeholder="Large Qty" class="form-control form-control-sm cartoon_large_qty_'+count+'" id="colFormLabelSm" >';
                             }
                             
                         }
                         if(data.success.cartoon_exrta_large==1){
                             html += '<input type="hidden" name="cartoon_exrta_large_'+count+'" value="'+data.success.cartoon_exrta_large+'" class="form-control form-control-sm" >';
                             if(data.success.cartoon_extar_large_qty){
-                                html +='<label  class="form-label">Cartoon(XL)</label><input type="text" name="cartoon_extar_large_qty_'+count+'" placeholder="XL Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="colFormLabelSm" >';
+                                html +='<label  class="form-label">Cartoon(XL)</label><input cartoon_extar_large_qty="'+data.success.cartoon_extar_large_qty+'" pices_stock="'+data.success.pices_qty+'" type="text" name="cartoon_extar_large_qty_'+count+'" placeholder="XL Qty" class="form-control form-control-sm cartoon_extar_large_qty_'+count+'" id="colFormLabelSm" >';
                             }
                             
                         }
                         if(data.success.cartoon_exrta_xxl==1){
                             html += '<input type="hidden" name="cartoon_exrta_xxl_'+count+'" value="'+data.success.cartoon_exrta_xxl+'" class="form-control form-control-sm" >';
                             if(data.success.cartoon_extar_large_xxl_qty){
-                                html +='<label  class="form-label">Cartoon(XXL)</label><input type="text" name="cartoon_extar_large_xxl_qty_'+count+'" placeholder="XXL Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="colFormLabelSm">';
+                                html +='<label  class="form-label">Cartoon(XXL)</label><input type="text" cartoon_exrta_large_xxl="'+data.success.cartoon_extar_large_xxl_qty+'" pices_stock="'+data.success.pices_qty+'" name="cartoon_extar_large_xxl_qty_'+count+'" placeholder="XXL Qty" class="form-control form-control-sm cartoon_extar_large_xxl_qty_'+count+'" id="colFormLabelSm">';
                             }
                             
                         }
@@ -466,27 +455,41 @@
                     if(data.success.dozon){
                         html += '<input type="hidden" name="dozon_'+count+'" value="'+data.success.dozon+'" class="form-control form-control-sm" >';
                         if(data.success.dozon_qty){
-                            html +='<label class="form-label">Dozon</label><input type="text" name="dozon_qty_'+count+'" placeholder="Dozon Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="dozon_qty" >';
+                            html +='<label class="form-label">Dozon</label><input dozon_stock="'+data.success.dozon_qty+'" pices_stock="'+data.success.pices_qty+'" type="text" name="dozon_qty_'+count+'" placeholder="Dozon Qty" class="form-control form-control-sm dozon_qty_'+count+'" id="dozon_qty" >';
                         }
                     }
                     if(data.success.box){
                         html += '<input type="hidden" name="box_'+count+'" value="'+data.success.box+'" class="form-control form-control-sm" >';
                         if(data.success.box_qty){
-                            html +='<label class="form-label">Box</label><input type="text" name="box_qty_'+count+'" placeholder="Box Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="box_qty" >';
-                        }
-                    }
-                    if(data.success.pices){
-                        html += '<input type="hidden" name="pices_'+count+'" value="'+data.success.pices+'" class="form-control form-control-sm" >';
-                        if(data.success.pices_qty){
-                            html +='<label class="form-label">Pices</label><input type="text" name="pices_qty_'+count+'" placeholder="Pices Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="pices_qty" >';
+                            html +='<label class="form-label">Box</label><input type="text" box_stock="'+data.success.box_qty+'" pices_stock="'+data.success.pices_qty+'" name="box_qty_'+count+'" placeholder="'+data.success.box_qty+'" class="form-control form-control-sm box_qty_'+count+'" id="box_qty" >';
                         }
                     }
                     if(data.success.roll){
                         html += '<input type="hidden" name="roll_'+count+'" value="'+data.success.roll+'" class="form-control form-control-sm" >';
-                        if(data.success.roll_qty==1){
-                            html +='<label class="form-label">Roll</label><input type="text" name="roll_qty_'+count+'" placeholder="Roll Qty" class="form-control form-control-sm form-control form-control-sm-sm" id="roll_qty" >';
+                        if(data.success.roll_qty){
+                            html +='<label class="form-label">Roll</label><input type="text" roll_stock="'+data.success.roll_qty+'" name="roll_qty_'+count+'" placeholder="Roll Qty" class="form-control form-control-sm roll_qty_'+count+'" id="roll_qty" >';
                         }
 
+                    }
+                    if(data.success.weight==1){
+                                
+                        html += '<input type="hidden"  name="weight_'+count+'" value="'+data.success.weight+'" class="form-control form-control-sm" >';
+                        if(data.success.weight_kg){
+                                html += '<input type="hidden" name="weight_kg_'+count+'" value="'+data.success.weight_kg+'" class="form-control form-control-sm">';
+                                html +='<label class="form-label">Kg</label><input type="text" id="weight_kg_qty_'+count+'"  weight_kg_stock="'+data.success.weight_kg+'" name="weight_kg_qty_'+count+'" placeholder="Kg Qty" class="form-control form-control-sm weight_kg_qty_'+count+'" id="weight_kg" >';
+                                html += '<span class="weight_kg_qty_error"></span>';
+                        }
+                        if(data.success.weight_pound){
+                            html += '<input type="hidden" name="weight_pound_'+count+'" value="'+data.success.weight_pound+'" class="form-control form-control-sm">';
+                            html +='<label class="form-label">Pound</label><input type="text" name="weight_pound_qty_'+count+'" placeholder="Pound Qty"  weight_pound_stock="'+data.success.weight_pound_qty+'" class="form-control form-control-sm weight_pound_qty_'+count+'" id="weight_pound" >';
+                        }
+                    }
+                    if(data.success.pices){
+                        html += '<input type="hidden" name="pices_'+count+'" value="'+data.success.pices+'" class="form-control form-control-sm" >';
+                        html +='<label class="form-label">Pices</label><input type="text" pices_stock="'+data.success.pices_qty+'"  name="pices_qty_'+count+'" placeholder="Pices Qty" class="form-control form-control-sm pices_qty_'+count+'" id="pices_qty" >';
+                        // if(data.success.pices_qty){
+                        //     html +='<label class="form-label">Pices</label><input type="text" pices_stock="'+data.success.pices_qty+'"  name="pices_qty_'+count+'" placeholder="'+data.success.pices_qty+'" class="form-control form-control-sm pices_qty_'+count+'" id="pices_qty" >';
+                        // }
                     }
 
                     html +='</td>';
@@ -506,6 +509,16 @@
                 select2_yarn();
                 select2_material();
                 select2_color();
+                box_stock_check(count);
+                roll_stock_check(count)
+                dozon_stock_check(count);
+                pices_stock_check(count);
+                cartoon_extar_large_xxl_stock_check(count);
+                cartoon_extar_large_stock_check(count);
+                cartoon_large_qty_stock_check(count);
+                cartoon_medium_qty_stock_check(count);
+                cartoon_qty_small_stock_check(count);
+                weight_stock_check(count);
                 count ++;
                 
             }
@@ -522,9 +535,9 @@
 
         var received_chalan_id= $('#received_chalan_id').val();
         var date= $('#date').val();
-    //    var product_receiveds = (document.getElementsByClassName('product_received').checked == true;
-    // $('.product_received').prop("checked") == false
-    var product_received = document.getElementsByName('product_received');
+        //    var product_receiveds = (document.getElementsByClassName('product_received').checked == true;
+        // $('.product_received').prop("checked") == false
+        var product_received = document.getElementsByName('product_received');
         var product_received_value = false;
 
         for(var i=0; i<product_received.length;i++){
@@ -800,4 +813,210 @@
         },
     });
 </script> --}}
+
+<script>
+     var count =0;
+     function roll_stock_check(count){
+        $(".roll_qty_"+count).on("keyup", function() {
+           var roll_qty= $('.roll_qty_'+count).val();
+           var roll_qty_stock=$('.roll_qty_'+count).attr('roll_stock');
+           var pices_stock_store=roll_qty*roll_qty_stock;
+           $('.pices_qty_'+count).val(pices_stock_store);
+           $('.weight_kg_qty_'+count).val(pices_stock_store);
+           $('.weight_pound_qty_'+count).val(pices_stock_store);
+        });
+     }
+     function dozon_stock_check(count){
+        $(".dozon_qty_"+count).on("keyup", function() {
+           var dozon_qty= $('.dozon_qty_'+count).val();
+           var dozon_qty_stock=$('.dozon_qty_'+count).attr('dozon_stock');
+           var pices_stock_store=dozon_qty*dozon_qty_stock;
+           $('.pices_qty_'+count).val(pices_stock_store);
+           $('.weight_kg_qty_'+count).val(pices_stock_store);
+           $('.weight_pound_qty_'+count).val(pices_stock_store);
+        });
+     }
+
+     function cartoon_extar_large_xxl_stock_check(count){
+        $(".cartoon_extar_large_xxl_qty_"+count).on("keyup", function() {
+           var cartoon_extar_large_xxl_qty_qty= $('.cartoon_extar_large_xxl_qty_'+count).val();
+           var cartoon_extar_large_xxl_qty_stock=$('.cartoon_extar_large_xxl_qty_'+count).attr('cartoon_exrta_large_xxl');
+           var cartoon_extar_large_xxl_qty_store=cartoon_extar_large_xxl_qty_qty*cartoon_extar_large_xxl_qty_stock;
+           $('.pices_qty_'+count).val(cartoon_extar_large_xxl_qty_store);
+           $('.weight_kg_qty_'+count).val(cartoon_extar_large_xxl_qty_store);
+           $('.weight_pound_qty_'+count).val(cartoon_extar_large_xxl_qty_store);
+
+        });
+     }
+     function cartoon_extar_large_stock_check(count){
+        $(".cartoon_extar_large_qty_"+count).on("keyup", function() {
+           var cartoon_extar_large_qty= $('.cartoon_extar_large_qty_'+count).val();
+           var cartoon_extar_large_qty_stock=$('.cartoon_extar_large_qty_'+count).attr('cartoon_extar_large_qty');
+           var cartoon_extar_large_qty_store=cartoon_extar_large_qty*cartoon_extar_large_qty_stock;
+           $('.pices_qty_'+count).val(cartoon_extar_large_qty_store);
+           $('.weight_kg_qty_'+count).val(cartoon_extar_large_qty_store);
+           $('.weight_pound_qty_'+count).val(cartoon_extar_large_qty_store);
+        });
+        
+     }
+     function cartoon_large_qty_stock_check(count){
+        $(".cartoon_large_qty_"+count).on("keyup", function() {
+            var cartoon_large_qty= $('.cartoon_large_qty_'+count).val();
+            var cartoon_large_qty_stock=$('.cartoon_large_qty_'+count).attr('cartoon_large_qty');
+            var cartoon_large_qty_store=cartoon_large_qty*cartoon_large_qty_stock;
+            $('.pices_qty_'+count).val(cartoon_large_qty_store);
+            $('.weight_kg_qty_'+count).val(cartoon_large_qty_store);
+            $('.weight_pound_qty_'+count).val(cartoon_large_qty_store);
+        });
+     }
+     function cartoon_medium_qty_stock_check(count){
+        $(".cartoon_medium_qty_"+count).on("keyup", function() {
+           var cartoon_medium_qty= $('.cartoon_medium_qty_'+count).val();
+           var cartoon_medium_qty_stock=$('.cartoon_medium_qty_'+count).attr('cartoon_medium_qty');
+           var cartoon_medium_qty_store=cartoon_medium_qty*cartoon_medium_qty_stock;
+           $('.pices_qty_'+count).val(cartoon_medium_qty_store);
+           $('.weight_kg_qty_'+count).val(cartoon_medium_qty_store);
+           $('.weight_pound_qty_'+count).val(cartoon_medium_qty_store);
+        });
+     }
+     function cartoon_qty_small_stock_check(count){
+        $(".cartoon_qty_small_"+count).on("keyup", function() {
+           var cartoon_qty_small= $('.cartoon_qty_small_'+count).val();
+           var cartoon_qty_small_stock=$('.cartoon_qty_small_'+count).attr('cartoon_qty_small');
+           var cartoon_qty_small_store=cartoon_qty_small*cartoon_qty_small_stock;
+           $('.pices_qty_'+count).val(cartoon_qty_small_store);
+           $('.weight_kg_qty_'+count).val(cartoon_qty_small_store);
+           $('.weight_pound_qty_'+count).val(cartoon_qty_small_store);
+        });
+     }
+    function box_stock_check(count){
+        // var count =0;
+        $(".box_qty_"+count).on("keyup", function() {
+           var box_qty= $('.box_qty_'+count).val();
+        //    var pices_qty= $('.box_qty_'+count).attr('pices_stock');
+           var box_qty_stock=$('.box_qty_'+count).attr('box_stock');
+           var pices_stock_store=box_qty*box_qty_stock;
+           $('.pices_qty_'+count).val(pices_stock_store);
+           $('.weight_kg_qty_'+count).val(pices_stock_store);
+           $('.weight_pound_qty_'+count).val(pices_stock_store);
+        //    console.log(pices_stock_store)
+        });    
+    }
+
+    function pices_stock_check(count){
+        // var count =0;
+        $('.pices_qty_'+count).on("keyup", function() {
+           var pices_qty= $('.pices_qty_'+count).val();
+           var box_qty_stock=$('.box_qty_'+count).attr('box_stock');
+           var box_pices_stock = pices_qty/box_qty_stock;
+           $('.box_qty_'+count).val(box_pices_stock);
+           var dozon_qty_stock=$('.dozon_qty_'+count).attr('dozon_stock');
+           var dozon_stock = pices_qty/dozon_qty_stock;
+           $('.dozon_qty_'+count).val(dozon_stock);
+           var roll_qty_stock=$('.roll_qty_'+count).attr('roll_stock');
+           var roll_stock = pices_qty/roll_qty_stock;
+           $('.roll_qty_'+count).val(roll_stock);
+
+
+           var cartoon_qty_small_stock=$('.cartoon_qty_small_'+count).attr('cartoon_qty_small');
+           var cartoon_qty_small_stock = pices_qty/cartoon_qty_small_stock;
+           $('.cartoon_qty_small_'+count).val(cartoon_qty_small_stock);
+
+           var cartoon_medium_qty_stock=$('.cartoon_medium_qty_'+count).attr('cartoon_medium_qty');
+           var  cartoon_medium_qty_stock = pices_qty/cartoon_medium_qty_stock;
+           $('.cartoon_medium_qty_'+count).val(cartoon_medium_qty_stock);
+
+           var cartoon_large_qty_stock=$('.cartoon_large_qty_'+count).attr('cartoon_large_qty');
+           var  cartoon_large_qty_stock = pices_qty/cartoon_large_qty_stock;
+           $('.cartoon_large_qty_'+count).val(cartoon_large_qty_stock);
+           var cartoon_extar_large_qty_stock=$('.cartoon_extar_large_qty_'+count).attr('cartoon_extar_large_qty');
+           var  cartoon_extar_large_qty_stock = pices_qty/cartoon_extar_large_qty_stock;
+           $('.cartoon_extar_large_qty_'+count).val(cartoon_extar_large_qty_stock);
+           var cartoon_exrta_large_xxl_qty_stock=$('.cartoon_extar_large_xxl_qty_'+count).attr('cartoon_exrta_large_xxl');
+           var  cartoon_exrta_large_xxl_qty_stock = pices_qty/cartoon_exrta_large_xxl_qty_stock;
+           $('.cartoon_extar_large_xxl_qty_'+count).val(cartoon_exrta_large_xxl_qty_stock);
+      
+
+        //  console.log(box_qty);
+        //    var pices_stock= $('.pices_qty_'+count).attr('pices_stock');           
+        //    var pices_stock_store=pices_qty/pices_stock;
+       
+        //    $('.dozon_qty_'+count).val(pices_stock_store);
+        //    $('.cartoon_extar_large_xxl_qty_'+count).val(pices_stock_store);
+        //    $('.cartoon_extar_large_qty_'+count).val(pices_stock_store);
+        //    $('.cartoon_large_qty_'+count).val(pices_stock_store);
+        //    $('.cartoon_medium_qty_'+count).val(pices_stock_store);
+        //    $('.cartoon_qty_small_'+count).val(pices_stock_store);
+        });
+    }
+    function weight_stock_check(count){
+        // var count =0;
+        $('.weight_kg_qty_'+count).on("keyup", function() {
+           var weight_kg_qty= $('.weight_kg_qty_'+count).val();
+            //    console.log(weight_kg_qty)
+           var box_qty_stock=$('.box_qty_'+count).attr('box_stock');
+           var box_kg_stock = weight_kg_qty/box_qty_stock;
+           $('.box_qty_'+count).val(box_kg_stock);
+
+           var dozon_qty_stock=$('.dozon_qty_'+count).attr('dozon_stock');
+           var dozon_stock = weight_kg_qty/dozon_qty_stock;
+           $('.dozon_qty_'+count).val(dozon_stock);
+           var roll_qty_stock=$('.roll_qty_'+count).attr('roll_stock');
+           var roll_stock = weight_kg_qty/roll_qty_stock;
+           $('.roll_qty_'+count).val(roll_stock);
+
+
+           var cartoon_qty_small_stock=$('.cartoon_qty_small_'+count).attr('cartoon_qty_small');
+           var cartoon_qty_small_stock = weight_kg_qty/cartoon_qty_small_stock;
+           $('.cartoon_qty_small_'+count).val(cartoon_qty_small_stock);
+
+           var cartoon_medium_qty_stock=$('.cartoon_medium_qty_'+count).attr('cartoon_medium_qty');
+           var  cartoon_medium_qty_stock = weight_kg_qty/cartoon_medium_qty_stock;
+           $('.cartoon_medium_qty_'+count).val(cartoon_medium_qty_stock);
+
+           var cartoon_large_qty_stock=$('.cartoon_large_qty_'+count).attr('cartoon_large_qty');
+           var  cartoon_large_qty_stock = weight_kg_qty/cartoon_large_qty_stock;
+           $('.cartoon_large_qty_'+count).val(cartoon_large_qty_stock);
+           var cartoon_extar_large_qty_stock=$('.cartoon_extar_large_qty_'+count).attr('cartoon_extar_large_qty');
+           var  cartoon_extar_large_qty_stock = weight_kg_qty/cartoon_extar_large_qty_stock;
+           $('.cartoon_extar_large_qty_'+count).val(cartoon_extar_large_qty_stock);
+           var cartoon_exrta_large_xxl_qty_stock=$('.cartoon_extar_large_xxl_qty_'+count).attr('cartoon_exrta_large_xxl');
+           var  cartoon_exrta_large_xxl_qty_stock = weight_kg_qty/cartoon_exrta_large_xxl_qty_stock;
+           $('.cartoon_extar_large_xxl_qty_'+count).val(cartoon_exrta_large_xxl_qty_stock);
+        });
+        $('.weight_pound_qty_'+count).on("keyup", function() {
+            var weight_pound_qty= $('.weight_pound_qty_'+count).val();
+                //    console.log(weight_kg_qty)
+            var box_qty_stock=$('.box_qty_'+count).attr('box_stock');
+            var box_kg_stock = weight_pound_qty/box_qty_stock;
+            $('.box_qty_'+count).val(box_kg_stock);
+
+            var dozon_qty_stock=$('.dozon_qty_'+count).attr('dozon_stock');
+            var dozon_stock = weight_pound_qty/dozon_qty_stock;
+            $('.dozon_qty_'+count).val(dozon_stock);
+            var roll_qty_stock=$('.roll_qty_'+count).attr('roll_stock');
+            var roll_stock = weight_pound_qty/roll_qty_stock;
+            $('.roll_qty_'+count).val(roll_stock);
+
+
+            var cartoon_qty_small_stock=$('.cartoon_qty_small_'+count).attr('cartoon_qty_small');
+            var cartoon_qty_small_stock = weight_pound_qty/cartoon_qty_small_stock;
+            $('.cartoon_qty_small_'+count).val(cartoon_qty_small_stock);
+
+            var cartoon_medium_qty_stock=$('.cartoon_medium_qty_'+count).attr('cartoon_medium_qty');
+            var  cartoon_medium_qty_stock = weight_pound_qty/cartoon_medium_qty_stock;
+            $('.cartoon_medium_qty_'+count).val(cartoon_medium_qty_stock);
+
+            var cartoon_large_qty_stock=$('.cartoon_large_qty_'+count).attr('cartoon_large_qty');
+            var  cartoon_large_qty_stock = weight_pound_qty/cartoon_large_qty_stock;
+            $('.cartoon_large_qty_'+count).val(cartoon_large_qty_stock);
+            var cartoon_extar_large_qty_stock=$('.cartoon_extar_large_qty_'+count).attr('cartoon_extar_large_qty');
+            var  cartoon_extar_large_qty_stock = weight_pound_qty/cartoon_extar_large_qty_stock;
+            $('.cartoon_extar_large_qty_'+count).val(cartoon_extar_large_qty_stock);
+            var cartoon_exrta_large_xxl_qty_stock=$('.cartoon_extar_large_xxl_qty_'+count).attr('cartoon_exrta_large_xxl');
+            var  cartoon_exrta_large_xxl_qty_stock = weight_pound_qty/cartoon_exrta_large_xxl_qty_stock;
+            $('.cartoon_extar_large_xxl_qty_'+count).val(cartoon_exrta_large_xxl_qty_stock);
+        });
+    }
+</script>
 @endsection

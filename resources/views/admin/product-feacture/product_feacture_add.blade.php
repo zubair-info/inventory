@@ -154,6 +154,10 @@
                                                 <input type="checkbox" name="Weights_pounds" value="1" class="form-check-input" id="weightPoundCheck">
                                                 <label class="form-check-label" for="weightPoundCheck">Pound</label>
                                             </div>
+                                            <div class="form-group mb-2 col-lg-2 d-none weight_pound_qty_check" style="margin-left: 23px;">
+                                                <input type="text" class="form-control" id="weight_pound_qty" name="weight_pound_qty"  placeholder="1 Pound = 0.453592 kg">
+                                                <span style="color:red;" id="weight_pound_qty"></span>
+                                            </div>
 
                                         </div>
                                         <div class="form-check  form-checkbox-success mb-2 form-check-inline">
@@ -226,8 +230,8 @@
                                             <label class="form-check-label" for="pices">Pices</label>
                                         </div>
                                         <div class="form-group mb-2 col-lg-2 d-none pices_check" style="margin-left: 23px;">
-                                            <input type="text" class="form-control" id="pices_qty" name="pices_qty"  placeholder="Enter quantity ">
-                                            <span style="color:red;" id="pices_qty"></span>
+                                            {{-- <input type="text" class="form-control" id="pices_qty" name="pices_qty"  placeholder="Enter quantity ">
+                                            <span style="color:red;" id="pices_qty"></span> --}}
                                         </div>
                                         <div class="form-check form-checkbox-success mb-2 form-check-inline">
                                             <input type="checkbox" name="roll" value="1" class="form-check-input" id="roll">
@@ -363,6 +367,11 @@
                         console.log("weightKgCheck is checked.");
                     }else if($('#weightPoundCheck').prop("checked") == true){
                         console.log("weightPoundCheck is checked.");
+                        var weight_pound_qty = $('#weight_pound_qty').val();
+                        if(weight_pound_qty==''){
+                            toastr.warning("Pounds Value Requried");
+                            return false;
+                        }
                     }else{
                         console.log("Weight is unhecked.");
                         toastr.warning("Weight kg  and pound at list one checked");
@@ -370,11 +379,11 @@
                     }
                 }else if($('#pices').prop("checked") == true){
                     console.log("Pices is checked.");
-                    var pices_qty = $('#pices_qty').val();
-                    if(pices_qty==''){
-                        toastr.warning("Pices Value Requried");
-                        return false;
-                    }
+                    // var pices_qty = $('#pices_qty').val();
+                    // if(pices_qty==''){
+                    //     toastr.warning("Pices Value Requried");
+                    //     return false;
+                    // }
                 }else{
                     toastr.warning("Weight and pices at list one checked");
                     console.log("Weight is unhecked.");
@@ -468,11 +477,6 @@
             $('.unit_type_check').addClass('block');
         }
         if(unit_type==0){
-        
-            // $('input[name="brand"]:checked').val(0);
-            // $('input[name="yarn_type"]:checked').val(0);
-            // $('input[name="material_type"]:checked').val(0);
-            // $('input[name="unit_type"]:checked').val(0);
             $('input[name="weight"]:checked').val(0);
             $('input[name="Weights_kgs"]:checked').val(0);
             $('input[name="Weights_pounds"]:checked').val(0);
@@ -504,6 +508,17 @@
         if($(this).is(":checked")) {
             $('.weight_check').removeClass('d-none');
             $('.weight_check').addClass('block');
+            $('input[name="Weights_pounds"]').click(function() {
+                if($(this).is(":checked")) {
+                    $('.weight_pound_qty_check').removeClass('d-none');
+                    $('.weight_pound_qty_check').addClass('block');
+                } else {
+                    $('.weight_pound_qty_check').removeClass('block');
+                    $('.weight_pound_qty_check').addClass('d-none');
+                    $('input[name="weight_pound_qty"]:checked').val('');
+                
+                }
+            });
             // $('input[name="weight"]:checked').attr("required", "true");
         } else {
             $('.weight_check').removeClass('block');
@@ -512,7 +527,9 @@
             $('input[name="weight"]:checked').val('');
             $('input[name="Weights_kgs"]:checked').val('');
             $('input[name="Weights_pounds"]:checked').val('');
-            $('input[name="cartoon_extar_large_xxl_qty"]').val('');
+            $('input[name="weight_pound_qty"]:checked').val('');
+
+            // $('input[name="cartoon_extar_large_xxl_qty"]').val('');
             // $('input[name="weight"]:checked').attr("required", "false");
         }
     });
@@ -609,17 +626,17 @@
         
         }
     });
-    $('input[name="pices"]').click(function() {
-        if($(this).is(":checked")) {
-            $('.pices_check').removeClass('d-none');
-            $('.pices_check').addClass('block');
-        } else {
-            $('.pices_check').removeClass('block');
-            $('.pices_check').addClass('d-none');
-            $('input[name="pices"]:checked').val('');
+    // $('input[name="pices"]').click(function() {
+    //     // if($(this).is(":checked")) {
+    //     //     $('.pices_check').removeClass('d-none');
+    //     //     $('.pices_check').addClass('block');
+    //     // } else {
+    //     //     $('.pices_check').removeClass('block');
+    //     //     $('.pices_check').addClass('d-none');
+    //     //     $('input[name="pices"]:checked').val('');
            
-        }
-    });
+    //     // }
+    // });
     $('input[name="roll"]').click(function() {
         if($(this).is(":checked")) {
             $('.roll_check').removeClass('d-none');

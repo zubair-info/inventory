@@ -20,17 +20,13 @@ class ProductReceivedController extends Controller
     //
     function index()
     {
-        $all_product_received = ProductReceived::get();
+        $all_product_received = ProductReceived::orderBy('id', 'DESC')->get();
         $all_supplier_buyer = Supplier::all();
         $all_department = Department::all();
         $all_brand = Brand::all();
         $all_yarn = Yarn::all();
         $all_material = Material::all();
         $all_color = Color::all();
-
-        // $all_product_received = ProductReceived::get()->groupBy('received_chalan_id');
-        // $all_product_received = ProductReceived::selectRaw('count(*) as total, received_chalan_id')->groupBy('received_chalan_id')->get();
-        // return $all_product_received;
         return view('admin.product-received.index', [
             'all_supplier_buyer' => $all_supplier_buyer,
             'all_department' => $all_department,
@@ -67,7 +63,9 @@ class ProductReceivedController extends Controller
 
     function product_received_store(Request $request)
     {
+
         // return $request;
+
 
         // return $request->yarn_type_id_0;
         $form_count = $request->form_count;
@@ -77,18 +75,6 @@ class ProductReceivedController extends Controller
         $product_received = $request->product_received;
         $supplier_buyer_id = $request->supplier_buyer_id;
         $department_id = $request->department_id;
-        // $product_name = $request->product_name;
-        $validator = Validator::make($request->all(), [
-            // 'received_chalan_id' => 'required',
-            // 'date' => 'required',
-            // 'product_received' => 'required',
-            // 'product_name' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => $validator->errors(),
-            ]);
-        }
         for ($i = 0; $i <= $form_count; $i++) {
             $product_name = "product_name_" . $i;
             $product_name_req = $request->has($product_name);
@@ -98,12 +84,8 @@ class ProductReceivedController extends Controller
                 } else {
                     $product_name = NULL;
                 }
+
                 $yarn_type_id = "yarn_type_id_" . $i;
-
-                // dd($request->has($yarn_type_id));
-
-                // return $request->input('yarn_type_id_0');
-                // return $request->yarn_type_id_0;
                 if ($request->has($yarn_type_id)) {
                     $yarn_type_id = $request->$yarn_type_id;
                     $yarn_type_id_value = 'required';
@@ -375,6 +357,33 @@ class ProductReceivedController extends Controller
                         'error' => $validator->errors()->first(),
                     ]);
                 }
+                $stock = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->select('stock')->value('stock');
+                if ($stock != '') {
+                    if ($weight_kg_qty) {
+                        $stock = $stock + $weight_kg_qty;
+                    }
+                    if ($weight_pound_qty) {
+                        $stock = $stock + $weight_pound_qty;
+                    }
+                    if ($pices_qty) {
+                        $stock = $stock + $pices_qty;
+                    }
+                    $product_uid = time() . uniqid(mt_rand(10000, 999999));
+                } else {
+                    if ($weight_kg_qty) {
+                        $stock = $weight_kg_qty;
+                    }
+                    if ($weight_pound_qty) {
+                        $stock = $weight_pound_qty;
+                    }
+                    if ($pices_qty) {
+                        $stock = $pices_qty;
+                    }
+                    $product_uid = time() . uniqid(mt_rand(10000, 999999));
+                    // $stock = $pices_qty;
+                }
+                // return $stock;
+                // die();
                 ProductReceived::insert([
                     'product_uid' => $request->product_uid,
                     'received_chalan_id' => $request->received_chalan_id,
@@ -393,7 +402,6 @@ class ProductReceivedController extends Controller
                     'weight_kg_qty' => $weight_kg_qty,
                     'weight_pound' => $weight_pound,
                     'weight_pound_qty' => $weight_pound_qty,
-
                     'cartoon' => $cartoon,
                     'cartoon_small' => $cartoon_small,
                     'cartoon_qty_small' => $cartoon_qty_small,
@@ -414,45 +422,267 @@ class ProductReceivedController extends Controller
                     'roll' => $roll,
                     'roll_qty' => $roll_qty,
                     'rate' => $rate,
+                    'stock' => $stock,
                     'created_at' => Carbon::now(),
                 ]);
             }
-            // $notification = array(
-            //     'message' => 'Add Product Received Sucessfully!',
-            //     'alert-type' => 'success'
-            // );
-            // // return redirect()->route('product_received_add')->with($notification);
-            // return response()->json(['success' => $notification]);
-            // else {
-            //     return $product_name_req = $request->$product_name;
-            // }
-
-            // if (isset($request->$product_name)) {
-            //     $product_name = $request->$product_name;
-            // } else {
-            //     $product_name = NULL;
-            // }
-
-            // }
-            // $product_null = ProductReceived::select('product_name', 'product_uid')->get();
-            // return  $product_null;
-
-            // $product_nulls = ProductReceived::where('product_uid', $product_null->product_uid)->where('product_name', 'null')->get();
-            // return $product_nulls;
         }
-        // $notification = array(
-        //     'message' => 'Add Product Received Sucessfully!',
-        //     'alert-type' => 'success'
-        // );
-        // // return redirect()->route('product_received_add')->with($notification);
-        return response()->json(['success' => 'Product Received Sucessfull!!']);
+
+        return response()->json(['success' => 'Received is successfully added']);
     }
 
     function productFeatureSearchData(Request $request)
     {
         $data = ProductFeature::where('id', $request->product_feature_id)->first();
-
         return response()->json(['success' =>  $data]);
+    }
+
+    function product_received_update(Request $request)
+    {
+
+        // return $request->product_received_id;
+
+        $product_name = $request->has('product_name');
+        if ($request->has('yarn_type_id')) {
+            $yarn_type_id = $request->yarn_type_id;
+            $yarn_type_id_value = 'required';
+            $yarn_type_id_required = 'yarn_type_id';
+        } else {
+            $yarn_type_id_required = 'yarn_type_id';
+            $yarn_type_id_value = 'nullable';
+            $yarn_type_id = NULL;
+        }
+        if ($request->has('material_type_id')) {
+            $material_type_id = $request->material_type_id;
+            $material_type_id_required = 'material_type_id';
+            $material_type_id_value = 'required';
+        } else {
+            $material_type_id = NULL;
+            $material_type_id_required = 'material_type_id';
+            $material_type_id_value = 'nullable';
+        }
+        if ($request->has('brand_id')) {
+            $brand_id = $request->brand_id;
+            $brand_id_required = 'brand_id';
+            $brand_id_value = 'required';
+        } else {
+            $brand_id = NULL;
+            $brand_id_required = 'brand_id';
+            $brand_id_value = 'nullable';
+        }
+
+        if ($request->has('color_id')) {
+            $color_id = $request->color_id;
+            $color_id_required = "color_id";
+            $color_id_value = 'required';
+        } else {
+            $color_id = NULL;
+            $color_id_required = "color_id";
+            $color_id_value = 'nullable';
+        }
+
+        if ($request->has('weight_kg_qty_data')) {
+            $weight_kg_qty_required = "weight_kg_qty";
+            $weight_kg_qty_value = 'required';
+            $weight_kg_qty = $request->weight_kg_qty_data;
+        } else {
+            $weight_kg_qty = NULL;
+            $weight_kg_qty_required =  "weight_kg_qty";
+            $weight_kg_qty_value = 'nullable';
+        }
+        if ($request->has('weight_pound_qty')) {
+            $weight_pound_qty = $request->weight_pound_qty;
+            $weight_pound_qty_required = "weight_pound_qty";
+            $weight_pound_qty_value = 'required';
+        } else {
+            $weight_pound_qty = NULL;
+            $weight_pound_qty_required = "weight_pound_qty";
+            $weight_pound_qty_value = 'nullable';
+        }
+        if ($request->has('cartoon_qty_small')) {
+            $cartoon_qty_small = $request->cartoon_qty_small;
+            $cartoon_qty_small_required = "cartoon_qty_small";
+            $cartoon_qty_small_value = 'required';
+        } else {
+            $cartoon_qty_small = NULL;
+            $cartoon_qty_small_required = "cartoon_qty_small";
+            $cartoon_qty_small_value = 'nullable';
+        }
+        if ($request->has('cartoon_medium_qty')) {
+            $cartoon_medium_qty = $request->cartoon_medium_qty;
+            $cartoon_medium_qty_required =  "cartoon_medium_qty";
+            $cartoon_medium_qty_value = 'required';
+        } else {
+            $cartoon_medium_qty = NULL;
+            $cartoon_medium_qty_required =  "cartoon_medium_qty";
+            $cartoon_medium_qty_value = 'nullable';
+        }
+
+        if ($request->has('cartoon_medium_qty')) {
+            $cartoon_large_qty = $request->cartoon_large_qty;
+            $cartoon_large_qty_required = "cartoon_large_qty";
+            $cartoon_large_qty_value = 'required';
+        } else {
+            $cartoon_large_qty = NULL;
+            $cartoon_large_qty_required = "cartoon_large_qty";
+            $cartoon_large_qty_value = 'nullable';
+        }
+        if ($request->has('cartoon_extar_large_qty')) {
+            $cartoon_extar_large_qty = $request->cartoon_extar_large_qty;
+            $cartoon_extar_large_qty_required = "cartoon_extar_large_qty";
+            $cartoon_extar_large_qty_value = 'required';
+        } else {
+            $cartoon_extar_large_qty = NULL;
+            $cartoon_extar_large_qty_required = "cartoon_extar_large_qty";
+            $cartoon_extar_large_qty_value = 'nullable';
+        }
+        if ($request->has('cartoon_extar_large_xxl_qty')) {
+            $cartoon_extar_large_xxl_qty = $request->cartoon_extar_large_xxl_qty;
+            $cartoon_extar_large_xxl_qty_required = "cartoon_extar_large_xxl_qty";
+            $cartoon_extar_large_xxl_qty_value = 'required';
+        } else {
+            $cartoon_extar_large_xxl_qty = NULL;
+            $cartoon_extar_large_xxl_qty_required = "cartoon_extar_large_xxl_qty";
+            $cartoon_extar_large_xxl_qty_value = 'nullable';
+        }
+        if ($request->has('dozon_qty')) {
+            $dozon_qty = $request->dozon_qty;
+            $dozon_qty_required = "dozon_qty";
+            $dozon_qty_value = 'required';
+        } else {
+            $dozon_qty = NULL;
+            $dozon_qty_required = "dozon_qty";
+            $dozon_qty_value = 'nullable';
+        }
+        if ($request->has('pices_qty')) {
+            $pices_qty = $request->pices_qty;
+            $pices_qty_required =  "pices_qty";
+            $pices_qty_value = 'required';
+        } else {
+            $pices_qty = NULL;
+            $pices_qty_required =  "pices_qty";
+            $pices_qty_value = 'nullable';
+        }
+        if ($request->has('box_qty')) {
+            $box_qty = $request->box_qty;
+            $box_qty_required =  "box_qty";
+            $box_qty_value = 'required';
+        } else {
+            $box_qty = NULL;
+            $box_qty_required =  "box_qty";
+            $box_qty_value = 'nullable';
+        }
+        if ($request->has('roll_qty')) {
+            $roll_qty = $request->roll_qty;
+            $roll_qty_required = "roll_qty";
+            $roll_qty_value = 'required';
+        } else {
+            $roll_qty = NULL;
+            $roll_qty_required = "roll_qty";
+            $roll_qty_value = 'nullable';
+        }
+        if ($request->has('rate')) {
+            $rate = $request->rate;
+            $rate_required = "rate";
+            $rate_qty_value = 'required';
+        } else {
+            $rate = NULL;
+            $rate_required = "rate";
+            $rate_qty_value = 'nullable';
+        }
+
+        $validator = Validator::make($request->all(), [
+            $yarn_type_id_required => $yarn_type_id_value,
+            $material_type_id_required => $material_type_id_value,
+            $brand_id_required => $brand_id_value,
+            $color_id_required => $color_id_value,
+            $weight_kg_qty_required => $weight_kg_qty_value,
+            $weight_pound_qty_required => $weight_pound_qty_value,
+            $cartoon_qty_small_required => $cartoon_qty_small_value,
+            $cartoon_medium_qty_required => $cartoon_medium_qty_value,
+            $cartoon_large_qty_required => $cartoon_large_qty_value,
+            $cartoon_extar_large_qty_required => $cartoon_extar_large_qty_value,
+            $cartoon_extar_large_xxl_qty_required => $cartoon_extar_large_xxl_qty_value,
+            $dozon_qty_required => $dozon_qty_value,
+            $pices_qty_required => $pices_qty_value,
+            $box_qty_required => $box_qty_value,
+            $roll_qty_required => $roll_qty_value,
+            $rate_required => $rate_qty_value,
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->first(),
+            ]);
+        }
+
+        // $updated_at_stock = ProductReceived::orderBy('updated_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->select('stock')->value('stock');
+        $created_at_stock = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->select('stock')->value('stock');
+        // return  $updated_at_stock;
+        // return    $created_at_stock;
+        $last_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->value('id');
+        $last_previous_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->where('id', '<', $last_stock_id)->max('id');
+        $last_previous_Stock = ProductReceived::find($last_previous_stock_id);
+        $previous_Stock = $last_previous_Stock->stock;
+        if ($pices_qty) {
+
+            $stock =  $previous_Stock + $pices_qty;
+        }
+
+        // if ($created_at_stock) {
+        //     // $stock = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->select('stock')->value('stock');
+        //     $last_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->value('id');
+        //     $last_previous_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->where('id', '<', $last_stock_id)->max('id');
+        //     $last_previous_Stock = ProductReceived::find($last_previous_stock_id);
+        //     $previous_Stock = $last_previous_Stock->stock;
+        //     if ($pices_qty) {
+
+        //         $stock =  $previous_Stock + $pices_qty;
+        //     }
+        //     return   $stock;
+        //     // return 'zubair';
+        //     // $last_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->value('id');
+        //     // $last_previous_stock_id = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->where('id', '<', $last_stock_id)->max('id');
+        //     // $last_previous_Stock = ProductReceived::find($last_previous_stock_id);
+        //     // $previous_Stock = $last_previous_Stock->stock;
+        //     // // if($pices_qty)
+        //     // $stock = $previous_Stock + $request->total_qty;
+        //     // return  $stock;
+        // } else {
+        //     // return 'moon';
+
+
+        //     // return  $stock;
+        //     $stock = ProductReceived::orderBy('created_at', 'DESC')->where('product_name', $product_name)->where('yarn_type_id', $yarn_type_id)->where('brand_id', $brand_id)->where('color_id', $color_id)->where('material_type_id', $material_type_id)->select('stock')->value('stock');
+        //     return   $stock;
+        //     // dd($stock);
+        //     // if ($pices_qty) {
+
+        //     //     $stock = $stock + $pices_qty;
+        //     // }
+        //     // return $stock;
+        // }
+
+
+        ProductReceived::find($request->product_received_id)->update([
+            'yarn_type_id' => $request->yarn_type_id,
+            'brand_id' => $request->brand_id,
+            'color_id' => $request->color_id,
+            'material_type_id' => $request->material_type_id,
+            'weight_kg_qty' => $request->weight_kg_qty,
+            'weight_pound_qty' => $request->weight_pound_qty,
+            'cartoon_qty_small' => $request->cartoon_qty_small,
+            'cartoon_medium_qty' => $request->cartoon_medium_qty,
+            'cartoon_large_qty' => $request->cartoon_large_qty,
+            'cartoon_extar_large_qty' => $request->cartoon_extar_large_qty,
+            'cartoon_extar_large_xxl_qty' => $request->cartoon_extar_large_xxl_qty,
+            'dozon_qty' => $request->dozon_qty,
+            'pices_qty' => $request->pices_qty,
+            'box_qty' => $request->box_qty,
+            'roll_qty' => $request->roll_qty,
+            'rate' => $request->rate,
+            'updated_at' => Carbon::now(),
+        ]);
+        return response()->json(['success' => 'Received is successfully added']);
     }
     function productReceivedDelete($id)
     {

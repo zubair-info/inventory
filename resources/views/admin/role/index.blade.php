@@ -59,7 +59,7 @@
             <div class="card mt-3">
                 <div class="card-header">
                     <div class="cart-tittle">
-                        Assigning  Permissions To A User 
+                        Assigning  roles to a user 
                     </div>
                 </div>
                 <div class="card-body">
@@ -150,7 +150,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="font-weight-bold text-black">Assign Permissions to Roles</h4>
+                    <h4 class="font-weight-bold text-black">Assign permissions to roles</h4>
 
                 </div>
                 <div class="card-body">
@@ -198,7 +198,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4 class="font-weight-bold text-black">Assign  Permissions To A User</h4>
+                    <h4 class="font-weight-bold text-black">Assign  role to a user</h4>
 
                 </div>
                 <div class="card-body">

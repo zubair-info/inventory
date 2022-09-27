@@ -17,17 +17,24 @@
 
          <!-- third party css -->
          <link href="{{asset('backend/assets/css/vendor/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css">
+         {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet">
+         <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet">
+         <link href="{{asset('assets/css/vendor/buttons.bootstrap5.css')}}" rel="stylesheet">
+         <link href="{{asset('assets/css/vendor/select.bootstrap5.css')}}" rel="stylesheet"> --}}
          <!-- third party css end -->
          <!-- App css -->
          <link href="{{asset('backend/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
          <link href="{{asset('backend/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="light-style">
          <link href="{{asset('backend/assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-        <link href="{{asset('backend/assets/css/vendor/select.bootstrap5.css" rel="stylesheet')}}" type="text/css" />
-        {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/css/vendor/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" /> --}}
-        {{-- <script src="/js/validate.js"></script> --}}
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">   
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css">     
+        
+
+     
       
          
         <style>
@@ -189,15 +196,6 @@
                             </a>
                         </li>
                         @endcan
-                        @can('add_product_received')
-                        <li class="side-nav-item">
-                            <a href="{{ route('product_received_add') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span>Add Received Product</span>
-                            </a>
-                        </li>
-                        @endcan
-                       
                         @can('product_received')
                         <li class="side-nav-item">
                             <a href="{{ route('product_received') }}" class="side-nav-link">
@@ -206,6 +204,16 @@
                             </a>
                         </li>
                         @endcan
+                        @can('add_product_received')
+                        <li class="side-nav-item">
+                            <a href="{{ route('product_received_add') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span>Add Received</span>
+                            </a>
+                        </li>
+                        @endcan
+                       
+                        
                        
 
                         {{-- <li class="side-nav-item">
@@ -465,7 +473,7 @@
                                     <!-- item-->
                                     <a class="dropdown-item notify-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"> <i class="mdi mdi-logout me-1"></i>
+                                        document.getElementById('logout-form').submit();"> <i class="mdi mdi-logout me-1"></i>
                                         {{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -741,7 +749,7 @@
         <script src="{{asset('backend/assets/js/ui/component.fileupload.js')}}"></script>
         <!-- third party js -->
         <!-- third party js -->
-        <script src="{{asset('backend/assets/js/vendor/jquery.dataTables.min.js')}}"></script>
+        {{-- <script src="{{asset('backend/assets/js/vendor/jquery.dataTables.min.js')}}"></script>
         <script src="{{asset('backend/assets/js/vendor/dataTables.bootstrap5.js')}}"></script>
         <script src="{{asset('backend/assets/js/vendor/dataTables.responsive.min.js')}}"></script>
         <script src="{{asset('backend/assets/js/vendor/responsive.bootstrap5.min.js')}}"></script>
@@ -751,7 +759,14 @@
         <script src="{{asset('backend/assets/js/vendor/buttons.flash.min.js')}}"></script>
         <script src="{{asset('backend/assets/js/vendor/buttons.print.min.js')}}"></script>
         <script src="{{asset('backend/assets/js/vendor/dataTables.keyTable.min.js')}}"></script>
-        <script src="{{asset('backend/assets/js/vendor/dataTables.select.min.js')}}"></script>
+        <script src="{{asset('backend/assets/js/vendor/dataTables.select.min.js')}}"></script> --}}
+
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
+
         <!-- third party js ends -->
 
         <!-- demo app -->

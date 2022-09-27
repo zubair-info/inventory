@@ -96,6 +96,7 @@ Route::post('productFeatureSearchData', [ProductReceivedController::class, 'prod
 Route::post('product-received-store', [ProductReceivedController::class, 'product_received_store'])->name('product_received_store');
 Route::get('product-received-edit/{product_received_id}', [ProductReceivedController::class, 'product_received_edit'])->name('product_received_edit');
 Route::get('productReceivedDelete/{id}', [ProductReceivedController::class, 'productReceivedDelete'])->name('productReceivedDelete');
+Route::post('/product-received-update', [ProductReceivedController::class, 'product_received_update'])->name('product_received_update');
 // Route::post('product-received-store', [ProductReceivedController::class, 'store'])->name('cablelists.store');
 
 
